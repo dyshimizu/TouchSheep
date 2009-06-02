@@ -5,16 +5,14 @@ CXX           = g++
 LINK          = g++
 DEL           = rm -R -f
 MKDIR         = mkdir -p
-INCPATH       = -I/usr/include/qt4/QtCore \
-                -I/usr/include/qt4/QtGui \
-                -I/usr/include/qt4
-LIBS          = -L/usr/lib \
-                -lpthread
+INCPATH       = `pkg-config --cflags opencv`
+LIBS          = `pkg-config --libs opencv`
 DOC           = doc
-
+SOURCE        = src
+RELEASE       = release
 ####### Files
 SOURCES       = $(SOURCE)/main.c \
-                $(SOURCE)ConnectedComponent.c 
+                $(SOURCE)/driver/ConnectedComponent.c 
 
 OBJECTS       = $(RELEASE)/main.o \
                 $(RELEASE)/ConnectedComponent.o 
@@ -34,8 +32,8 @@ $(TARGET): dirrelease $(OBJECTS)
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/ConnectedComponent.o: $(SOURCE)/ConnectedComponent.c
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/ConnectedComponent.o $(SOURCE)/ConnectedComponent.c
+$(RELEASE)/ConnectedComponent.o: $(SOURCE)/driver/ConnectedComponent.c
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/ConnectedComponent.o $(SOURCE)/driver/ConnectedComponent.c
 
 $(RELEASE)/main.o: $(SOURCE)/main.c
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.c
