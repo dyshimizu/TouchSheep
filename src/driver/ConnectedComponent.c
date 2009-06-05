@@ -6,7 +6,6 @@
 
 ComponentList getConnectedComponents(IplImage* img){
 	// TODO: Melhorar matrixColor, pois é um vetor muito grande
-	//		 Comentar o código
 	
 	int i, j;											// contadores para o for
 	
@@ -19,7 +18,8 @@ ComponentList getConnectedComponents(IplImage* img){
 	unsigned long matrixSize[INTLEN];					// matriz contendo a quantidade de pixel
 														// de cada label, sendo matrixSize[label] = cor
 														
-	Rect matrixRect[INTLEN];
+	Rect matrixRect[INTLEN];							// matriz contendo o retângulo da posição do
+														// label, sendo matrixRect[label] = posição
 														
 	unsigned int label = 0;								// contador de labels
 	
@@ -128,48 +128,6 @@ ComponentList getConnectedComponents(IplImage* img){
 			component->rect = joinRects(component->rect, matrixRect[i]);
 		}
 	}
-	
-	Component* c;
-	c = list;
-	while(c != NULL){
-		Rect r = c->rect;
-		cvRectangle( img, r.min, r.max, CV_RGB(123,123,123), 3, 8, 0 );
-		printf("(%d, %d) (%d, %d)\n", r.min.x, r.min.y, r.max.x, r.max.y);
-		c = c->next;
-	}
-	
-	/*for (i = 1; i < img->height-1; i++) {
-		for (j = 1; j < img->width-1; j++) {
-			if(matrixColor[matrixLabel[i][j]] == 1){
-				data[(i)*step+(j)*channel] = 255;
-			}
-			
-			if(matrixColor[matrixLabel[i][j]] == 2){
-				data[(i)*step+(j)*channel] = 120;
-			}
-			
-			if(matrixColor[matrixLabel[i][j]] == 32){
-				data[(i)*step+(j)*channel] = 50;
-			}
-		}
-	}*/
-	
-	/*for(i =0; i< 50; i++){
-		printf("%d - (%d, %d) (%d, %d)\n", i, matrixColor[i], matrixRect[i].min.x, matrixRect[i].min.y, 
-		matrixRect[i].max.x, matrixRect[i].max.y);
-	}*/
-	
-	/*printf("\nComponentes:\n");
-	component = list;
-	while(component != NULL){
-		printf("%d\t%d\n", component->color, component->area);
-		component = component->next;
-	}*/
-	
-	cvNamedWindow( "teste", 1 );
-	cvShowImage( "teste", img );
-	
-	cvWaitKey(0);
 	
 	return list;
 	
