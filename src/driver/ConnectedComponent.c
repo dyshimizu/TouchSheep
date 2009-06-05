@@ -1,10 +1,12 @@
 #include "ConnectedComponent.h"
 
+
+#include <stdio.h>
+
+
 ComponentList getConnectedComponents(IplImage* img){
 	// TODO: Melhorar matrixColor, pois é um vetor muito grande
-	//		 Melhorar a alteração dos labels, for muito grande
-	//		 Retornar posição de cada compoente
-	//		Comentar o código
+	//		 Comentar o código
 	
 	int i, j;											// contadores para o for
 	
@@ -16,6 +18,8 @@ ComponentList getConnectedComponents(IplImage* img){
 														
 	unsigned long matrixSize[INTLEN];					// matriz contendo a quantidade de pixel
 														// de cada label, sendo matrixSize[label] = cor
+														
+	Rect matrixRect[INTLEN];
 														
 	unsigned int label = 0;								// contador de labels
 	
@@ -58,7 +62,7 @@ ComponentList getConnectedComponents(IplImage* img){
 					if(p13 != 0 && p13 != p11){
 						int x = matrixColor[p13];
 						long size = 0;
-						for(int h=0; h<INTLEN; h++){
+						for(int h=0; h<=label; h++){
 							if(matrixColor[h] == x && h != p11){
 								matrixColor[h] = matrixColor[p11];
 							}
@@ -66,15 +70,17 @@ ComponentList getConnectedComponents(IplImage* img){
 					}
 					matrixLabel[i][j] = p11;
 					matrixSize[p11]++;
+					matrixRect[p11] = addPointToRect(j, i, matrixRect[p11]);
 				}else{
 					if(p12 != 0){
 						matrixLabel[i][j] = p12;
 						matrixSize[p12]++;
+						matrixRect[p12] = addPointToRect(j, i, matrixRect[p12]);
 					}else{
 						if(p13 != 0){
 							if(p21 != 0 && p21 != p13){
 								int x = matrixColor[p21]; 
-								for(int h=0; h<INTLEN; h++){
+								for(int h=0; h<=label; h++){
 									if(matrixColor[h] == x && h != p13){
 										matrixColor[h] = matrixColor[p13];
 									}
@@ -82,16 +88,19 @@ ComponentList getConnectedComponents(IplImage* img){
 							}
 							matrixLabel[i][j] = p13;
 							matrixSize[p13]++;
+							matrixRect[p13] = addPointToRect(j, i, matrixRect[p13]);
 						}else{
 							if(p21 != 0){
 								matrixLabel[i][j] = p21;
 								matrixSize[p21]++;
+								matrixRect[p21] = addPointToRect(j, i, matrixRect[p21]);
 							}else{
 								label++;
 								matrixLabel[i][j] = label;
 								color++;
 								matrixColor[label] = color;
 								matrixSize[label] = 1;
+								matrixRect[label] = createRect(j, i, j, i);
 							}
 						}
 					}
@@ -107,15 +116,26 @@ ComponentList getConnectedComponents(IplImage* img){
 	ComponentList list = NULL;
 	Component* component;
 	
-	for(i=1; i<INTLEN; i++){
-		if(matrixColor[i] == 0)
-			break;
+	// juntar labels de mesma cor
+	for(i=1; i<=label; i++){
 		component = getComponent(list, matrixColor[i]);
 		if(component == NULL){
-			addComponent(&list, matrixColor[i], matrixSize[i]);
+			// componente novo
+			addComponent(&list, matrixColor[i], matrixSize[i], matrixRect[i]);
 		}else{
+			// componente já existente
 			component->area += matrixSize[i];
+			component->rect = joinRects(component->rect, matrixRect[i]);
 		}
+	}
+	
+	Component* c;
+	c = list;
+	while(c != NULL){
+		Rect r = c->rect;
+		cvRectangle( img, r.min, r.max, CV_RGB(123,123,123), 3, 8, 0 );
+		printf("(%d, %d) (%d, %d)\n", r.min.x, r.min.y, r.max.x, r.max.y);
+		c = c->next;
 	}
 	
 	/*for (i = 1; i < img->height-1; i++) {
@@ -144,12 +164,12 @@ ComponentList getConnectedComponents(IplImage* img){
 	while(component != NULL){
 		printf("%d\t%d\n", component->color, component->area);
 		component = component->next;
-	}
+	}*/
 	
 	cvNamedWindow( "teste", 1 );
 	cvShowImage( "teste", img );
 	
-	cvWaitKey(0);*/
+	cvWaitKey(0);
 	
 	return list;
 	
@@ -161,10 +181,11 @@ Component* newComponent(){
 	return component;
 }
 
-void addComponent(ComponentList* list, int color, long area){
+void addComponent(ComponentList* list, int color, long area, Rect rect){
 	Component* c = newComponent();
 	c->color = color;
 	c->area = area;
+	c->rect = rect;
 	c->next = NULL;
 	if(*list != NULL){
 		Component* component = *list;
@@ -189,4 +210,58 @@ Component* getComponent(ComponentList list, int color){
 		return component;
 	}
 	return NULL;
+}
+
+Rect createRect(int x1, int y1, int x2, int y2){
+	Rect r;
+	CvPoint p1;
+	CvPoint p2;
+	
+	p1.x = x1;
+	p1.y = y1;
+	p2.x = x2;
+	p2.y = y2;
+	
+	r.min = p1;
+	r.max = p2;
+	
+	return r;
+}
+
+Rect addPointToRect(int x, int y, Rect rect){
+	if(x < rect.min.x)
+		rect.min.x = x;
+	if(y > rect.max.y)
+		rect.max.y = y;
+	if(x > rect.max.x)
+		rect.max.x = x;
+	
+	return rect;
+}
+
+Rect joinRects(Rect r1, Rect r2){
+	Rect rect;
+	if(r1.min.x < r2.min.x){
+		rect.min.x = r1.min.x;
+	}else{
+		rect.min.x = r2.min.x;
+	}
+	if(r1.min.y < r2.min.y){
+		rect.min.y = r1.min.y;
+	}else{
+		rect.min.y = r2.min.y;
+	}
+	
+	if(r1.max.x > r2.max.x){
+		rect.max.x = r1.max.x;
+	}else{
+		rect.max.x = r2.max.x;
+	}
+	if(r1.max.y > r2.max.y){
+		rect.max.y = r1.max.y;
+	}else{
+		rect.max.y = r2.max.y;
+	}
+	
+	return rect;
 }
