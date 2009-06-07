@@ -1,7 +1,7 @@
 //
 // ConnectedComponent.h
 //
-// Ígor Bonadio & Daniel Shimizu Yutaka
+// Ígor Bonadio & Daniel Yutaka Shimizu
 // 2009
 //
 

@@ -1,3 +1,10 @@
+//
+// ConnectedComponent.c
+//
+// Ígor Bonadio & Daniel Yutaka Shimizu
+// 2009
+//
+
 #include "ConnectedComponent.h"
 
 
@@ -6,6 +13,7 @@
 
 ComponentList getConnectedComponents(IplImage* img){
 	// TODO: Melhorar matrixColor, pois é um vetor muito grande
+	//		 Calcular o centro de massa talvez seja uma boa solução...
 	
 	int i, j;											// contadores para o for
 	

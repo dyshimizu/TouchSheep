@@ -12,10 +12,12 @@ SOURCE        = src
 RELEASE       = release
 ####### Files
 SOURCES       = $(SOURCE)/main.c \
-                $(SOURCE)/driver/ConnectedComponent.c 
+                $(SOURCE)/driver/ConnectedComponent.c  \
+                $(SOURCE)/driver/Camshift.c 
 
 OBJECTS       = $(RELEASE)/main.o \
-                $(RELEASE)/ConnectedComponent.o 
+                $(RELEASE)/ConnectedComponent.o \
+                $(RELEASE)/Camshift.o 
                 
 TARGET        = $(RELEASE)/projeto
 
@@ -37,6 +39,9 @@ $(RELEASE)/ConnectedComponent.o: $(SOURCE)/driver/ConnectedComponent.c
 
 $(RELEASE)/main.o: $(SOURCE)/main.c
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.c
+
+$(RELEASE)/Camshift.o: $(SOURCE)/driver/Camshift.c
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/Camshift.o $(SOURCE)/driver/Camshift.c
 
 
 ####### Clean
