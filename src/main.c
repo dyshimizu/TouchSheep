@@ -72,6 +72,10 @@ int main( int argc, char** argv )
 {
 	markerList = NULL;
 	int id = 0;
+	CvBox2D tb;
+	CvRect s1l;
+	CvBox2D track_box;
+	Marker* marker;
 	
     CvCapture* capture = 0;
     
@@ -93,7 +97,6 @@ int main( int argc, char** argv )
         "\th - show/hide object histogram\n"
         "To initialize tracking, select the object with mouse\n" );
 
-    cvNamedWindow( "Histogram", 1 );
     cvNamedWindow( "CamShiftDemo", 1 );
     cvSetMouseCallback( "CamShiftDemo", on_mouse, 0 );
     cvCreateTrackbar( "Vmin", "CamShiftDemo", &vmin, 256, 0 );
@@ -117,10 +120,6 @@ int main( int argc, char** argv )
             hsv = cvCreateImage( cvGetSize(frame), 8, 3 );
             hue = cvCreateImage( cvGetSize(frame), 8, 1 );
             mask = cvCreateImage( cvGetSize(frame), 8, 1 );
-            backproject = cvCreateImage( cvGetSize(frame), 8, 1 );
-            hist = cvCreateHist( 1, &hdims, CV_HIST_ARRAY, &hranges, 1 );
-            histimg = cvCreateImage( cvSize(320,200), 8, 3 );
-            cvZero( histimg );
         }
 
         cvCopy( frame, image, 0 );
@@ -138,20 +137,19 @@ int main( int argc, char** argv )
             {
                 track_object = 1;
 
-				CvBox2D track_box;
+				
 				addMarker(&markerList, id, selection, track_box, getHistogram(hue, mask, selection) );
 				id++;
             }
 
-			CvBox2D tb;
-			CvRect s1l;
-			Marker* marker = markerList;
+			
+			marker = markerList;
 			while(marker != NULL){
 				marker->position = camshift(hue, mask, marker->position, marker->hist, &(marker->track_box));
 				
-				//if( !image->origin )
-				//	marker->track_box.angle = -(marker->track_box.angle);
-				//cvEllipseBox( image, marker->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+				if( !image->origin )
+					marker->track_box.angle = -(marker->track_box.angle);
+				cvEllipseBox( image, marker->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
 				
 				marker = marker->next;
 			}

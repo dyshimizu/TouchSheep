@@ -11,6 +11,8 @@ CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* 
 	
 	cvCamShift( backproject, selection, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &track_comp, track_box );
 	
+	cvReleaseImage(&backproject);
+	
 	return track_comp.rect;
 }
 
