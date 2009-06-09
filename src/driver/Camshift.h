@@ -13,21 +13,21 @@
 
 // Estrutura de dados para entrada no algoritmo do camshift.
 // É usada para rastrear mais de um marcador.
-typedef struct SCamshiftImage{
+typedef struct SMarker{
 	int id;
 	CvRect position;
 	CvHistogram *hist;
-	SCamshiftImage *next;
+	SMarker *next;
 }
-CamshiftImage;
+Marker;
 
 // Lista de marcadores para o camshift
-typedef CamshiftImage* CamshiftImageList;
+typedef Marker* MarkerList;
 
 // Retorna a posição do objeto
-CvRect camshift(IplImage* frame, CvRect position, CvHistogram* hist);
+CvRect camshift(IplImage* frame, CvRect selection);
 
 // Calcula histograma
-CvHistogram* getHistogram(IplImage* frame, CvRect position);
+CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);
 
 #endif
