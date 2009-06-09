@@ -16,6 +16,7 @@
 typedef struct SMarker{
 	int id;
 	CvRect position;
+	CvBox2D track_box;
 	CvHistogram *hist;
 	SMarker *next;
 }
@@ -29,5 +30,11 @@ CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* 
 
 // Calcula histograma
 CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);
+
+// Adiciona marcador na lista
+void addMarker(MarkerList* list, int id, CvRect position, CvBox2D track_box, CvHistogram *hist);
+
+// Remove marcador na lista
+bool removeMarker(MarkerList* list, int id);
 
 #endif

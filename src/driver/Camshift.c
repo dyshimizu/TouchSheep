@@ -34,3 +34,44 @@ CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect selection){
 	
 	return hist;
 }
+
+void addMarker(MarkerList* list, int id, CvRect position, CvBox2D track_box, CvHistogram *hist){
+	Marker* m;
+	m = (Marker *)malloc(sizeof(Marker));
+	m->id = id;
+	m->position = position;
+	m->track_box = track_box;
+	m->hist = hist;
+	m->next = NULL;
+	if(*list != NULL){
+		Marker* marker = *list;
+		while(marker->next != NULL){
+			marker = marker->next;
+		}
+		marker->next = m;
+	}else{
+		*list = m;
+	}
+}
+
+bool removeMarker(MarkerList* list, int id){
+	if(*list != NULL){
+		Marker* marker = *list;
+		Marker* aux;
+		if(marker->id == id){
+			*list = marker->next;
+			free(marker);
+			return true;
+		}
+		while(marker->next != NULL){
+			if(marker->next->id == id){
+				aux = marker->next;
+				marker->next = aux->next;
+				free(aux);
+				return true;
+			}
+			marker = marker->next;
+		}
+	}
+	return false;
+}
