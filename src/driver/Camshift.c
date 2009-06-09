@@ -75,3 +75,12 @@ bool removeMarker(MarkerList* list, int id){
 	}
 	return false;
 }
+
+void removeAllMarkers(MarkerList* list){
+	Marker* marker;
+	while(*list != NULL){
+		marker = *list;
+		*list = marker->next;
+		free(marker);
+	}
+}

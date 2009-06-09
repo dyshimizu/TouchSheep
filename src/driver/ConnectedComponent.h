@@ -42,6 +42,9 @@ void addComponent(ComponentList* list, int color, long area, Rect rect);
 // Retorna o componente conectado que possui a cor passada por parâmetro
 Component* getComponent(ComponentList list, int color);
 
+// Remove todos os componentes conectados da lista
+void removeAllComponents(ComponentList* list);
+
 Rect createRect(int x1, int y1, int x2, int y2);
 Rect addPointToRect(int x, int y, Rect rect);
 Rect joinRects(Rect r1, Rect r2);

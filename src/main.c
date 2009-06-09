@@ -224,7 +224,7 @@ int main(){
 	addMarker(&list, 2, p, t, NULL);
 	addMarker(&list, 3, p, t, NULL);
 	
-	removeMarker(&list, 3);
+	removeAllMarkers(&list);
 	
 	Marker* m;
 	m = list;

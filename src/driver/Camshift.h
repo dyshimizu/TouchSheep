@@ -34,7 +34,10 @@ CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);
 // Adiciona marcador na lista
 void addMarker(MarkerList* list, int id, CvRect position, CvBox2D track_box, CvHistogram *hist);
 
-// Remove marcador na lista
+// Remove marcador da lista
 bool removeMarker(MarkerList* list, int id);
+
+// Remove todos os marcadores da lista
+void removeAllMarkers(MarkerList* list);
 
 #endif

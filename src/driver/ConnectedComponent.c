@@ -178,6 +178,15 @@ Component* getComponent(ComponentList list, int color){
 	return NULL;
 }
 
+void removeAllComponents(ComponentList* list){
+	Component* component;
+	while(*list != NULL){
+		component = *list;
+		*list = component->next;
+		free(component);
+	}
+}
+
 Rect createRect(int x1, int y1, int x2, int y2){
 	Rect r;
 	CvPoint p1;
