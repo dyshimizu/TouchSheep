@@ -25,7 +25,7 @@ Marker;
 typedef Marker* MarkerList;
 
 // Retorna a posição do objeto
-CvRect camshift(IplImage* frame, CvRect selection);
+CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box);
 
 // Calcula histograma
 CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);

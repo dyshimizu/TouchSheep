@@ -1,5 +1,19 @@
 #include "Camshift.h"
 
+CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box){
+	
+	CvConnectedComp track_comp;
+	
+	IplImage* backproject;
+	backproject = cvCreateImage( cvGetSize(frame), 8, 1 );
+	cvCalcBackProject( &frame, backproject, hist );
+	cvAnd( backproject, mask, backproject, 0 );
+	
+	cvCamShift( backproject, selection, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &track_comp, track_box );
+	
+	return track_comp.rect;
+}
+
 CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect selection){
 	
 	int hdims = 16;

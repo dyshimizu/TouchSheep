@@ -149,20 +149,12 @@ int main( int argc, char** argv )
 
             if( track_object < 0 )
             {
-
-				hist =  getHistogram(hue, mask, selection);
-				
+                hist = getHistogram(hue, mask, selection);
                 track_window = selection;
                 track_object = 1;
-
             }
 
-            cvCalcBackProject( &hue, backproject, hist );
-            cvAnd( backproject, mask, backproject, 0 );
-            cvCamShift( backproject, track_window,
-                        cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ),
-                        &track_comp, &track_box );
-            track_window = track_comp.rect;
+			track_window = camshift(hue, mask, track_window, hist, &track_box);
             
             if( backproject_mode )
                 cvCvtColor( backproject, image, CV_GRAY2BGR );
