@@ -1,3 +1,10 @@
+//
+// Camshift.c
+//
+// Ígor Bonadio & Daniel Yutaka Shimizu
+// 2009
+//
+
 #include "Camshift.h"
 
 CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box){
