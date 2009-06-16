@@ -11,7 +11,7 @@
 #include "cv.h"
 #include "highgui.h"
 
-void kernelLoop(int cam, int vmin, int vmax, int smin);
-void kernelLoop(int cam, int vmin = 10, int vmax = 256, int smin = 30);
+void kernelLoop(int cam, int refresh, int vmin, int vmax, int smin);
+void kernelLoop(int cam, int refresh = 30, int vmin = 10, int vmax = 256, int smin = 30);
 
 #endif

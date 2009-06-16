@@ -7,7 +7,9 @@
 
 #include "Camshift.h"
 
-CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box){
+#include <stdio.h>
+
+CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box, bool executeConnectedComponents){
 	
 	CvConnectedComp track_comp;
 	
@@ -15,6 +17,26 @@ CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* 
 	backproject = cvCreateImage( cvGetSize(frame), 8, 1 );
 	cvCalcBackProject( &frame, backproject, hist );
 	cvAnd( backproject, mask, backproject, 0 );
+	
+	if(executeConnectedComponents){
+		ComponentList clist;
+		clist = getConnectedComponents(backproject);
+		Component* c;
+		c = clist;
+		int area = 0;
+		Rect rect;
+		while(c != NULL){
+			if(c->area > area){
+				area = c->area;
+				rect = c->rect;
+			}
+			c = c->next;
+		}
+		selection.x = rect.min.x;
+		selection.y = rect.min.y;
+		selection.width = rect.max.x - rect.min.x;
+		selection.height = rect.max.y - rect.min.y;
+	}
 	
 	cvCamShift( backproject, selection, cvTermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ), &track_comp, track_box );
 	

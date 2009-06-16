@@ -11,7 +11,9 @@
 
 MarkerList markerList;
 
-void kernelLoop(int cam, int vmin, int vmax, int smin){
+void kernelLoop(int cam, int refresh, int vmin, int vmax, int smin){
+	
+	int count = refresh;
 	
 	markerList = NULL;
 	
@@ -55,8 +57,14 @@ void kernelLoop(int cam, int vmin, int vmax, int smin){
 		// Percorre a lista de marcadores e executa o camshift
 		Marker *marker;
 		marker = markerList;
+		bool reset = false;
 		while(marker != NULL){
-			marker->position = camshift(hue, mask, marker->position, marker->hist, &(marker->track_box));
+			if(count <= 0){
+				marker->position = camshift(hue, mask, marker->position, marker->hist, &(marker->track_box), true);
+				reset = true;
+			}else{
+				marker->position = camshift(hue, mask, marker->position, marker->hist, &(marker->track_box), false);
+			}
 			
 			if( !frame->origin ){////////////
 				marker->track_box.angle = -(marker->track_box.angle);////////////
@@ -64,6 +72,10 @@ void kernelLoop(int cam, int vmin, int vmax, int smin){
 			cvEllipseBox( frame, marker->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );////////////
 			
 			marker = marker->next;
+		}
+		count--;
+		if(reset){
+			count = refresh;
 		}
 		
 		// termina o camshift... temporário!!!!

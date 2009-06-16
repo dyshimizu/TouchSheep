@@ -11,6 +11,8 @@
 #include "cv.h"
 #include "highgui.h"
 
+#include "ConnectedComponent.h"
+
 // Estrutura de dados para entrada no algoritmo do camshift.
 // É usada para rastrear mais de um marcador.
 typedef struct SMarker{
@@ -26,7 +28,7 @@ Marker;
 typedef Marker* MarkerList;
 
 // Retorna a posição do objeto
-CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box);
+CvRect camshift(IplImage* frame, IplImage* mask, CvRect selection, CvHistogram* hist, CvBox2D *track_box, bool executeConnectedComponents);
 
 // Calcula histograma
 CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);
