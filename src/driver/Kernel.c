@@ -7,17 +7,16 @@
 
 #include "Kernel.h"
 
-#include "Camshift.h"
-
 MarkerList markerList;
+int markerId;
 
-void kernelLoop(int cam, int refresh, int vmin, int vmax, int smin){
-	
+void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin){
 	int count = refresh;
 	
 	markerList = NULL;
+	markerId = 0;
 	
-	cvNamedWindow( "CamShiftDemo", 1 ); /////////////////////////
+	//cvNamedWindow( "CamShiftDemo", 1 ); /////////////////////////
 	
 	CvCapture* capture = 0;
 	
@@ -85,10 +84,32 @@ void kernelLoop(int cam, int refresh, int vmin, int vmax, int smin){
 			break;/////////////////
 		}////////////////
 		
-		cvShowImage( "CamShiftDemo", frame ); //////////////////////
+		//cvShowImage( "CamShiftDemo", frame ); //////////////////////
+		handle(frame, markerList);
 	}
 	
 	cvReleaseCapture( &capture );
 	cvDestroyWindow("CamShiftDemo"); ////////////
+	
+}
+
+void addMarker(CvRect position, CvHistogram* hist){
+	Marker* m;
+	m = (Marker *)malloc(sizeof(Marker));
+	m->id = markerId;
+	m->position = position;
+	CvBox2D track_box;
+	m->track_box = track_box;
+	m->hist = hist;
+	m->next = NULL;
+	if(markerList != NULL){
+		Marker* marker = markerList;
+		while(marker->next != NULL){
+			marker = marker->next;
+		}
+		marker->next = m;
+	}else{
+		markerList = m;
+	}
 	
 }
