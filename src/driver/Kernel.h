@@ -15,7 +15,7 @@
 
 typedef struct{
 	int thread_id;
-	int cam;
+	CvCapture* capture;
 	void (* handle)(IplImage*, MarkerList);
 	int refresh;
 	int vmin;
@@ -23,8 +23,7 @@ typedef struct{
 	int smin;
 } kernel_params;
 
-void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin);
-void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh = 30, int vmin = 10, int vmax = 256, int smin = 30);
+void kernelLoop(CvCapture* capture, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin);
 void *kernelThread(void *threadarg);
 void stopKernelThread();
 

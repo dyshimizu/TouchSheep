@@ -16,7 +16,7 @@ bool stop;
 void *kernelThread(void *threadarg){
 	kernel_params *p;
 	p = (kernel_params *)threadarg;
-	kernelLoop(p->cam, p->handle);
+	kernelLoop(p->capture, p->handle, p->refresh, p->vmin, p->vmax, p->smin);
 	pthread_exit(NULL);
 }
 
@@ -24,16 +24,12 @@ void stopKernelThread(){
 	stop = true;
 }
 
-void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin){
+void kernelLoop(CvCapture* capture, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin){
 	int count = refresh;
 	
 	markerList = NULL;
 	markerId = 0;
 	stop = false;
-	
-	CvCapture* capture = 0;
-	
-	capture = cvCaptureFromCAM(cam);
 	
 	IplImage* hsv = NULL;
 	IplImage* hue = NULL;
@@ -42,8 +38,6 @@ void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vm
 	while(1){
 		
 		IplImage* frame = NULL;
-		// aparentemente no Mac OS X cvQueryFrame nao desaloca 0.02MB a cada segundo, fazendo com que
-		// a memória cresça sempre... testar no Ubuntu
 		frame = cvQueryFrame( capture );
 		if( !frame ){
 			// erro ao capturar o frame
@@ -90,9 +84,6 @@ void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vm
 		
 		handle(frame, markerList);
 	}
-	
-	cvReleaseCapture( &capture );
-	cvDestroyWindow("CamShiftDemo"); ////////////
 	
 }
 
