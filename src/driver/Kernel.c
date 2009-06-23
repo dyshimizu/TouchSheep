@@ -6,17 +6,30 @@
 //
 
 #include "Kernel.h"
+#include <stdio.h>
+#include <pthread.h>
 
 MarkerList markerList;
 int markerId;
+bool stop;
+
+void *kernelThread(void *threadarg){
+	kernel_params *p;
+	p = (kernel_params *)threadarg;
+	kernelLoop(p->cam, p->handle);
+	pthread_exit(NULL);
+}
+
+void stopKernelThread(){
+	stop = true;
+}
 
 void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin){
 	int count = refresh;
 	
 	markerList = NULL;
 	markerId = 0;
-	
-	//cvNamedWindow( "CamShiftDemo", 1 ); /////////////////////////
+	stop = false;
 	
 	CvCapture* capture = 0;
 	
@@ -64,12 +77,6 @@ void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vm
 			}else{
 				marker->position = camshift(hue, mask, marker->position, marker->hist, &(marker->track_box), false);
 			}
-			
-			if( !frame->origin ){////////////
-				marker->track_box.angle = -(marker->track_box.angle);////////////
-			}//////////////////
-			cvEllipseBox( frame, marker->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );////////////
-			
 			marker = marker->next;
 		}
 		count--;
@@ -77,14 +84,10 @@ void kernelLoop(int cam, void handle(IplImage*, MarkerList), int refresh, int vm
 			count = refresh;
 		}
 		
-		// termina o camshift... temporário!!!!
-		int c;/////////////////
-		c = cvWaitKey(10);//////////////
-		if( (char) c == 27 ){///////////////
-			break;/////////////////
-		}////////////////
+		cvWaitKey(10); // trocar por sleep
+		if(stop)
+			break;
 		
-		//cvShowImage( "CamShiftDemo", frame ); //////////////////////
 		handle(frame, markerList);
 	}
 	
@@ -97,6 +100,7 @@ void addMarker(CvRect position, CvHistogram* hist){
 	Marker* m;
 	m = (Marker *)malloc(sizeof(Marker));
 	m->id = markerId;
+	markerId++;
 	m->position = position;
 	CvBox2D track_box;
 	m->track_box = track_box;
