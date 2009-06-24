@@ -11,42 +11,57 @@ DOC           = doc
 SOURCE        = src
 RELEASE       = release
 ####### Files
-SOURCES       = $(SOURCE)/main.c \
-                $(SOURCE)/driver/ConnectedComponent.c  \
-                $(SOURCE)/driver/Camshift.c \
-                $(SOURCE)/driver/Kernel.c 
+SOURCES       = $(SOURCE)/main.c
 
-OBJECTS       = $(RELEASE)/main.o \
-                $(RELEASE)/ConnectedComponent.o \
-                $(RELEASE)/Camshift.o \
-                $(RELEASE)/Kernel.o 
+OBJECTS       = $(RELEASE)/main.o
                 
 TARGET        = $(RELEASE)/projeto
 
-SOURCES       = $(TEST)/testRunner.cpp \
-                $(TEST)/mainTest.cpp 
+KERNELSOURCES       = $(SOURCE)/driver/ConnectedComponent.c  \
+                      $(SOURCE)/driver/Camshift.c \
+                      $(SOURCE)/driver/Kernel.c 
+
+KERNELOBJECTS       = $(RELEASE)/ConnectedComponent.o \
+                      $(RELEASE)/Camshift.o \
+                      $(RELEASE)/Kernel.o 
+                
+KERNELTARGET        = $(RELEASE)/libtskernel.so
 
 ####### Compile
 all: $(TARGET)
 
 $(TARGET): dirrelease $(OBJECTS)
-	$(LINK) $(INCPATH) $(LIBS) -o $(TARGET) $(OBJECTS)
+	export LD_LIBRARY_PATH=release
+	$(LINK) $(INCPATH) $(LIBS) -Lrelease -ltskernel -o $(TARGET) $(OBJECTS)
 	@echo Build finalizado!
 
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/ConnectedComponent.o: $(SOURCE)/driver/ConnectedComponent.c
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/ConnectedComponent.o $(SOURCE)/driver/ConnectedComponent.c
-
 $(RELEASE)/main.o: $(SOURCE)/main.c
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.c
+	$(CXX) -c $(INCPATH) $(LIBS) -ltskernel -o $(RELEASE)/main.o $(SOURCE)/main.c
+
+####### TSKernel
+.PHONY : tskernel
+
+tskernel: $(KERNELTARGET)
+
+$(KERNELTARGET): dirkernelrelease $(KERNELOBJECTS)
+	$(LINK) -shared -Wl,-soname,libtskernel.so $(INCPATH) $(LIBS) -o $(KERNELTARGET) $(KERNELOBJECTS)
+	@echo Build finalizado!
+
+dirkernelrelease: 
+	@$(MKDIR) $(RELEASE)
+
+$(RELEASE)/ConnectedComponent.o: $(SOURCE)/driver/ConnectedComponent.c
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/ConnectedComponent.o $(SOURCE)/driver/ConnectedComponent.c
 
 $(RELEASE)/Camshift.o: $(SOURCE)/driver/Camshift.c
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/Camshift.o $(SOURCE)/driver/Camshift.c
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/Camshift.o $(SOURCE)/driver/Camshift.c
 
 $(RELEASE)/Kernel.o: $(SOURCE)/driver/Kernel.c
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/Kernel.o $(SOURCE)/driver/Kernel.c
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/Kernel.o $(SOURCE)/driver/Kernel.c
+
 
 
 ####### Clean
