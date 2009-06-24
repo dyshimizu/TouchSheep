@@ -1,4 +1,4 @@
-#include "driver/Kernel.h"
+#include "../driver/src/Kernel.h"
 #include <stdio.h>
 #include "cv.h"
 #include "highgui.h"
