@@ -108,3 +108,11 @@ void addMarker(CvRect position, CvHistogram* hist){
 	}
 	
 }
+
+void removeAllMarkers(){
+	removeAllMarkers(&markerList);
+}
+
+bool removeMarker(int id){
+	return removeMarker(&markerList, id);
+}

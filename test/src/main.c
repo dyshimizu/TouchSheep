@@ -1,4 +1,4 @@
-#include "../driver/src/Kernel.h"
+#include "TSKernel.h"
 #include <stdio.h>
 #include "cv.h"
 #include "highgui.h"

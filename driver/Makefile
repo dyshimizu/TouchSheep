@@ -21,6 +21,10 @@ OBJECTS       = $(RELEASE)/ConnectedComponent.o \
                 
 TARGET        = $(RELEASE)/libtskernel.so
 
+INSTALLDIR    = /usr/local/lib/libtskernel.so
+INCLUDE       = $(SOURCE)/TSKernel.h
+INCLUDEDIR	  = /usr/local/include/TSKernel.h
+
 ####### Compile
 all: $(TARGET)
 
@@ -39,6 +43,25 @@ $(RELEASE)/Camshift.o: $(SOURCE)/Camshift.c
 
 $(RELEASE)/Kernel.o: $(SOURCE)/Kernel.c
 	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/Kernel.o $(SOURCE)/Kernel.c
+
+####### Install
+.PHONY : install
+
+install:
+	cp $(TARGET) $(INSTALLDIR)
+	cp $(INCLUDE) $(INCLUDEDIR)
+	ldconfig
+	@echo Instalado com sucesso!
+
+####### Uninstall
+.PHONY : uninstall
+
+uninstall:
+	rm $(INSTALLDIR)
+	rm $(INCLUDEDIR)
+	@echo Removido com sucesso!
+
+
 
 ####### Clean
 .PHONY : clean

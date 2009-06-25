@@ -21,8 +21,7 @@ TARGET        = $(RELEASE)/test
 all: $(TARGET)
 
 $(TARGET): dirrelease $(OBJECTS)
-	export LD_LIBRARY_PATH=../driver/release
-	$(LINK) $(INCPATH) $(LIBS) -L../driver/release -ltskernel -o $(TARGET) $(OBJECTS)
+	$(LINK) $(INCPATH) $(LIBS) -ltskernel -o $(TARGET) $(OBJECTS)
 	@echo Build finalizado!
 
 dirrelease: 
