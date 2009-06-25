@@ -30,3 +30,28 @@
           Orientados pelo prof. dr. João Fernando Marar
            UNESP - Departamento de Computação - labSaci
                        saci.fc.unesp.br
+
+= Introdução
+
+  TouchSheep é uma interface humano-computador baseada em visão
+computacional.
+
+
+= Requisitos
+
+  - Sistema Operacional Linux
+  - openCV
+
+  Para Ubuntu Linux:
+
+    - Instalando ferramentas para compilação: sudo apt-get install build-essential
+    - Instalando opencv: sudo apt-get install libcv-dev
+
+= Estrutura
+
+  O projeto é dividido em 2 módulos:
+
+    - Driver
+    - API
+
+  Verifique cada uma de suas pastas para maiores informações

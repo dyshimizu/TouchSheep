@@ -1,0 +1,10 @@
+Driver
+
+Para compilar:
+make
+
+Para instalar a shared library no seu sistema
+sudo make install
+
+Para removê-la:
+sudo make unistall
