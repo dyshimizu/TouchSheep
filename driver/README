@@ -1,10 +1,28 @@
 Driver
 
-Para compilar:
-make
+= Introdução
 
-Para instalar a shared library no seu sistema
-sudo make install
+  Driver é o módulo responsável pelo processamento de imagens e técnicas simples 
+de visão computacional.
 
-Para removê-la:
-sudo make unistall
+  Ele tem como objetivo encontrar os marcadores correspondentes aos histogramas 
+que o usuário passar como parâmetro e retornar a posição dos mesmos. Reconhecimentos
+mais avançado, como os gestos, são feitos na camada da API.
+
+  O driver é fornecido como uma shared library chamada libtskernel.so e um cabeçalho
+para programas em c/c++ chamada TSKernel.h.
+
+  Para utilizá-lo você deve compila-lo e instalá-lo. Para isso veja o item "Compilando
+e Instalando". Após isso é só incluir o cabeçalho em seu programa e utilizá-lo. 
+Lembre-se que também fornecemos uma API que facilita o desenvolvimento de aplicações.
+
+= Compilando e Instalando
+
+  - Para compilar:
+    make
+
+  - Para instalar a shared library no seu sistema e copiar o cabeçalho necessário:
+    sudo make install
+
+  - Para removê-la:
+    sudo make unistall

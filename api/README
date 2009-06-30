@@ -6,7 +6,6 @@ TODO:
      Essa classe é a base das aplicações que utilizam a interface TouchSheep.
      É nela que o driver é iniciado, e onde todos os componentes que reagirão
    aos comandos do usuário serão registrados.
-     Em meta-linguagem temos uma representação da utilização desejada:
 
  - TSListener
      Essa classe é uma interface que define os objetos que escutarão os eventos.
