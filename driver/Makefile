@@ -22,7 +22,7 @@ OBJECTS       = $(RELEASE)/ConnectedComponent.o \
 TARGET        = $(RELEASE)/libtskernel.so
 
 INSTALLDIR    = /usr/local/lib/libtskernel.so
-INCLUDE       = $(SOURCE)/TSKernel.h
+INCLUDE       = include/TSKernel.h
 INCLUDEDIR	  = /usr/local/include/TSKernel.h
 
 ####### Compile
