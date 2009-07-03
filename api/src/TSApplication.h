@@ -39,7 +39,7 @@ public:
 	
 	// Adiciona um Listener
 	// tsListener é adicionado em uma lista de TSListener que é chamado em
-	// handle (método privado que executa uma ação a cada frame capturado pelo
+	// handle (método que executa uma ação a cada frame capturado pelo
 	// kernel)
 	void addListener (TSListener tsListener);
 	

@@ -87,7 +87,7 @@ void kernelLoop(CvCapture* capture, void handle(IplImage*, MarkerList), int refr
 	
 }
 
-void addMarker(CvRect position, CvHistogram* hist){
+int addMarker(CvRect position, CvHistogram* hist){
 	Marker* m;
 	m = (Marker *)malloc(sizeof(Marker));
 	m->id = markerId;
@@ -106,7 +106,7 @@ void addMarker(CvRect position, CvHistogram* hist){
 	}else{
 		markerList = m;
 	}
-	
+	return markerId-1;
 }
 
 void removeAllMarkers(){

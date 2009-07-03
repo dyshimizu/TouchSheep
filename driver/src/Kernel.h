@@ -34,7 +34,7 @@ void *kernelThread(void *threadarg);
 void stopKernelThread();
 
 // Adiciona marcador
-void addMarker(CvRect position, CvHistogram* hist);
+int addMarker(CvRect position, CvHistogram* hist);
 
 // Remove todos os marcadores
 void removeAllMarkers();

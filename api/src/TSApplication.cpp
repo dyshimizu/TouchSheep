@@ -42,7 +42,7 @@ void TSApplication::removeAllListeners (){
 }
 
 void TSApplication::handle (IplImage* img, MarkerList markerList){
-	printf("handle\n");
+	
 }
 
 TSApplication::~TSApplication (){
@@ -51,5 +51,4 @@ TSApplication::~TSApplication (){
 
 void fcallback (IplImage* img, MarkerList list){
 	TSAPPLICATIONPOINTERTOCALLBACK->handle(img, list);
-	printf("fcallback\n");
 }
