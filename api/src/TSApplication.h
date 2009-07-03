@@ -2,9 +2,13 @@
 #define TSAPPLICATION_H
 
 #include <list>
+#include <stdio.h>
+
+#include "TSKernel.h"
 
 #include "highgui.h"
-#include "TSKernel.h"
+
+#include <pthread.h>
 
 #include "TSListener.h"
 
@@ -14,7 +18,7 @@ public:
 	// Construtor
 	// Inicia uma aplicação TouchSheep utilizando como entrada
 	// o cvCapture passado por parâmetro
-	TSApplication (CvCapture cvCapture, int refresh, int vmin, int vmax, int smin);
+	TSApplication (CvCapture* cvCapture, int refresh, int vmin, int vmax, int smin);
 	
 	// Adiciona marcador
 	// Dada uma posição e um histograma, é adicionado um marcador de id
@@ -42,19 +46,25 @@ public:
 	// Remove todos os Listeners
 	void removeAllListeners ();
 	
+	// Handle chamado a cada laço do kernel
+	// Recebe cada frame e a lista de marcadores contendo suas posições
+	void handle (IplImage* img, MarkerList markerList);
+	
 	// Destrutor
 	virtual ~TSApplication ();
 
 private:
+	// Parametros do kernel
+	kernel_params p;
+	
+	// thread do kernel
+	pthread_t kthread;
+	
 	// tipos de marcadores
 	// -> adicionar os tipos aqui
 	
 	// Lista de Listeners
 	std::list<TSListener> tsListenerList;
-	
-	// Handle chamado a cada laço do kernel
-	// Recebe cada frame e a lista de marcadores contendo suas posições
-	void * handle (IplImage* img, MarkerList markerList);
 };
 
 #endif
