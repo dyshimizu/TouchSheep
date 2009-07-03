@@ -11,6 +11,7 @@
 #include <pthread.h>
 
 #include "TSListener.h"
+#include "TSMarker.h"
 
 class TSApplication
 {
@@ -21,15 +22,15 @@ public:
 	TSApplication (CvCapture* cvCapture, int refresh, int vmin, int vmax, int smin);
 	
 	// Adiciona marcador
-	// Dada uma posição e um histograma, é adicionado um marcador de id
+	// Dada TSMarker, é adicionado um marcador de id
 	// retornando pela função
-	int addMarker (CvRect position, CvHistogram* hist, int markerType);
+	int addTSMarker (TSMarker* tsMarker);
 	
 	// Remove marcador
 	// Dado um id, o marcador correspondente é removido.
 	// Se a operação for realizada com sucesso, retorna-se true, caso
 	// contrário retorna-se false
-	bool removeMarker (int id);
+	bool removeTSMarker (int id);
 	
 	// Inicia o kernel TouchSheep
 	int start ();
@@ -41,10 +42,10 @@ public:
 	// tsListener é adicionado em uma lista de TSListener que é chamado em
 	// handle (método que executa uma ação a cada frame capturado pelo
 	// kernel)
-	void addListener (TSListener tsListener);
+	void addTSListener (TSListener tsListener);
 	
 	// Remove todos os Listeners
-	void removeAllListeners ();
+	void removeAllTSListeners ();
 	
 	// Handle chamado a cada laço do kernel
 	// Recebe cada frame e a lista de marcadores contendo suas posições

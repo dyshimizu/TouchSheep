@@ -17,11 +17,11 @@ TSApplication::TSApplication (CvCapture* cvCapture, int refresh, int vmin, int v
 	p.smin = smin;
 }
 
-int TSApplication::addMarker (CvRect position, CvHistogram* hist, int markerType){
+int TSApplication::addTSMarker (TSMarker* tsMarker){
 	
 }
 
-bool TSApplication::removeMarker (int id){
+bool TSApplication::removeTSMarker (int id){
 	
 }
 
@@ -33,11 +33,11 @@ void TSApplication::stop (){
 	stopKernelThread();
 }
 
-void TSApplication::addListener (TSListener tsListener){
+void TSApplication::addTSListener (TSListener tsListener){
 	
 }
 
-void TSApplication::removeAllListeners (){
+void TSApplication::removeAllTSListeners (){
 	
 }
 
