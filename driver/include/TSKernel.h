@@ -31,6 +31,9 @@ CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);
 // Adicionar um marcador
 void addMarker(CvRect position, CvHistogram* hist);
 
+// Remove um marcador identificado pelo id
+bool removeMarker(int id);
+
 // Parametros que devem ser passado para a thread de kernelLoop
 typedef struct{
 	int thread_id;
