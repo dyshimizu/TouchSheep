@@ -17,9 +17,8 @@ TSApplication::TSApplication (CvCapture* cvCapture, int refresh, int vmin, int v
 	p.smin = smin;
 }
 
-int TSApplication::addTSMarker (TSMarker* tsMarker, int markerType){
+int addTSMarker (int x1, int y1, int x2, int y2, int markerType){
 	// TODO:
-	// Definir TSMarkers
 	// Associar tipo e marcador
 	// retornar id
 }

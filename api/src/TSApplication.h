@@ -24,7 +24,7 @@ public:
 	// Adiciona marcador
 	// Dada TSMarker, é adicionado um marcador de id
 	// retornando pela função
-	int addTSMarker (TSMarker* tsMarker, int markerType);
+	int addTSMarker (int x1, int y1, int x2, int y2, int markerType);
 	
 	// Remove marcador
 	// Dado um id, o marcador correspondente é removido.
