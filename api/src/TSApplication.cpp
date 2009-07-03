@@ -17,12 +17,15 @@ TSApplication::TSApplication (CvCapture* cvCapture, int refresh, int vmin, int v
 	p.smin = smin;
 }
 
-int TSApplication::addTSMarker (TSMarker* tsMarker){
-	
+int TSApplication::addTSMarker (TSMarker* tsMarker, int markerType){
+	// TODO:
+	// Definir TSMarkers
+	// Associar tipo e marcador
+	// retornar id
 }
 
 bool TSApplication::removeTSMarker (int id){
-	
+	removeMarker(id);
 }
 
 int TSApplication::start (){
@@ -33,20 +36,22 @@ void TSApplication::stop (){
 	stopKernelThread();
 }
 
-void TSApplication::addTSListener (TSListener tsListener){
-	
+void TSApplication::addTSListener (TSListener* tsListener){
+	tsListenerList.push_back(tsListener);
 }
 
 void TSApplication::removeAllTSListeners (){
-	
+	tsListenerList.clear();
 }
 
 void TSApplication::handle (IplImage* img, MarkerList markerList){
-	
+	// TODO:
+	// Percorres os TSListeners e executá-los
+	// Mas antes, definí-los
 }
 
 TSApplication::~TSApplication (){
-	
+	stop();
 }
 
 void fcallback (IplImage* img, MarkerList list){

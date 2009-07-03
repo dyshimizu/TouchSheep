@@ -24,7 +24,7 @@ public:
 	// Adiciona marcador
 	// Dada TSMarker, é adicionado um marcador de id
 	// retornando pela função
-	int addTSMarker (TSMarker* tsMarker);
+	int addTSMarker (TSMarker* tsMarker, int markerType);
 	
 	// Remove marcador
 	// Dado um id, o marcador correspondente é removido.
@@ -42,7 +42,7 @@ public:
 	// tsListener é adicionado em uma lista de TSListener que é chamado em
 	// handle (método que executa uma ação a cada frame capturado pelo
 	// kernel)
-	void addTSListener (TSListener tsListener);
+	void addTSListener (TSListener* tsListener);
 	
 	// Remove todos os Listeners
 	void removeAllTSListeners ();
@@ -65,7 +65,7 @@ private:
 	// -> adicionar os tipos aqui
 	
 	// Lista de Listeners
-	std::list<TSListener> tsListenerList;
+	std::list<TSListener*> tsListenerList;
 };
 
 #endif
