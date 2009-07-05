@@ -12,7 +12,7 @@ mais avançado, como os gestos, são feitos na camada da API.
   O driver é fornecido como uma shared library chamada libtskernel.so e um cabeçalho
 para programas em c/c++ chamada TSKernel.h.
 
-  Para utilizá-lo você deve compila-lo e instalá-lo. Para isso veja o item "Compilando
+  Para utilizá-lo você deve compilá-lo e instalá-lo. Para isso veja o item "Compilando
 e Instalando". Após isso é só incluir o cabeçalho em seu programa e utilizá-lo. 
 Lembre-se que também fornecemos uma API que facilita o desenvolvimento de aplicações.
 
