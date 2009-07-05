@@ -87,11 +87,12 @@ void kernelLoop(CvCapture* capture, void handle(IplImage*, MarkerList), int refr
 	
 }
 
-int addMarker(CvRect position, CvHistogram* hist){
+int addMarker(int markerType, CvRect position, CvHistogram* hist){
 	Marker* m;
 	m = (Marker *)malloc(sizeof(Marker));
 	m->id = markerId;
 	markerId++;
+	m->markerType = markerType;
 	m->position = position;
 	CvBox2D track_box;
 	m->track_box = track_box;

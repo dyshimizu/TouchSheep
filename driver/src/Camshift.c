@@ -66,10 +66,11 @@ CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect selection){
 	return hist;
 }
 
-void addMarker(MarkerList* list, int id, CvRect position, CvBox2D track_box, CvHistogram *hist){
+void addMarker(MarkerList* list, int id, int markerType, CvRect position, CvBox2D track_box, CvHistogram *hist){
 	Marker* m;
 	m = (Marker *)malloc(sizeof(Marker));
 	m->id = id;
+	m->markerType = markerType;
 	m->position = position;
 	m->track_box = track_box;
 	m->hist = hist;
