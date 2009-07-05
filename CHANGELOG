@@ -1,0 +1,4 @@
+Version 0.0.1
+  
+  - Primeira Versão do Driver (Kernel e interface) e da API
+  - API Simples, não existem listeners sofisticados que reconheçam padrões.
