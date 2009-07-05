@@ -14,14 +14,12 @@ RELEASE       = release
 SOURCES       = $(SOURCE)/main.cpp \
                 $(SOURCE)/TSApplication.cpp \
                 $(SOURCE)/TSListener.cpp \
-                $(SOURCE)/TSEvent.cpp \
-                $(SOURCE)/TSMarker.cpp
+                $(SOURCE)/TSEvent.cpp
 
 OBJECTS       = $(RELEASE)/main.o \
                 $(RELEASE)/TSApplication.o \
                 $(RELEASE)/TSListener.o \
-                $(RELEASE)/TSEvent.o \
-                $(RELEASE)/TSMarker.o \
+                $(RELEASE)/TSEvent.o
                 
 TARGET        = $(RELEASE)/api
 
@@ -46,9 +44,6 @@ $(RELEASE)/TSListener.o: $(SOURCE)/TSListener.cpp
 
 $(RELEASE)/TSEvent.o: $(SOURCE)/TSEvent.cpp
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSEvent.o $(SOURCE)/TSEvent.cpp
-
-$(RELEASE)/TSMarker.o: $(SOURCE)/TSMarker.cpp
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSMarker.o $(SOURCE)/TSMarker.cpp
 
 
 ####### Clean

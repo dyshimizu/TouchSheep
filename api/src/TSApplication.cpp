@@ -44,9 +44,10 @@ void TSApplication::removeAllTSListeners (){
 }
 
 void TSApplication::handle (IplImage* img, MarkerList markerList){
-	// TODO:
-	// Percorres os TSListeners e executá-los
-	// Mas antes, definí-los
+	std::list<TSListener*>::iterator it;
+	for ( it=tsListenerList.begin() ; it != tsListenerList.end(); it++ ){
+		(*it)->listening(img, markerList);
+	}
 }
 
 TSApplication::~TSApplication (){
