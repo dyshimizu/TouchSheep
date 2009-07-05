@@ -11,7 +11,7 @@ public:
 	TSListener ();
 	virtual ~TSListener ();
 	
-	void performed (TSEvent* e);
+	virtual void performed (TSEvent* e);
 
 	void listening (IplImage* img, MarkerList markerList);
 	
