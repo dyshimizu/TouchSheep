@@ -15,6 +15,7 @@
 // É usada para rastrear mais de um marcador.
 typedef struct SMarker{
 	int id;
+	int markerType;
 	CvRect position;
 	CvBox2D track_box;
 	CvHistogram *hist;
@@ -29,7 +30,7 @@ typedef Marker* MarkerList;
 CvHistogram* getHistogram(IplImage* frame, IplImage* mask, CvRect position);
 
 // Adicionar um marcador
-void addMarker(CvRect position, CvHistogram* hist);
+void addMarker(int markerType, CvRect position, CvHistogram* hist);
 
 // Remove um marcador identificado pelo id
 bool removeMarker(int id);
