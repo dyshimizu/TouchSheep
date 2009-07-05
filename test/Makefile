@@ -21,7 +21,7 @@ TARGET        = $(RELEASE)/test
 all: $(TARGET)
 
 $(TARGET): dirrelease $(OBJECTS)
-	$(LINK) $(INCPATH) $(LIBS) -ltskernel -o $(TARGET) $(OBJECTS)
+	$(LINK) $(INCPATH) $(LIBS) -ltskernel -ltsapi -o $(TARGET) $(OBJECTS)
 	@echo Build finalizado!
 
 dirrelease: 
