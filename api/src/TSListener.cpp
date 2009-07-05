@@ -10,7 +10,7 @@ TSListener::~TSListener (){
 	
 }
 
-virtual void TSListener::performed (TSEvent* e){
+void TSListener::performed (TSEvent* e){
 	
 }
 

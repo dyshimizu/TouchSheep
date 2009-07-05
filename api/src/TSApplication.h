@@ -63,6 +63,21 @@ private:
 	// tipos de marcadores
 	// -> adicionar os tipos aqui
 	
+	// Frame atual em RGB
+	IplImage* frame;
+	
+	// Frame atua em HSV
+	IplImage* frameHSV;
+	
+	// Hue de HSV
+	IplImage* hue;
+	
+	// Mascara para gerar o histograma
+	IplImage* mask;
+	
+	// Histograma
+	CvHistogram *hist;
+	
 	// Lista de Listeners
 	std::list<TSListener*> tsListenerList;
 };
