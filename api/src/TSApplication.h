@@ -25,6 +25,12 @@ public:
 	// retornando pela função
 	int addTSMarker (int x1, int y1, int x2, int y2, int markerType);
 	
+	// Tipos de marcadores
+	const RightThumbFinger 	= 1;
+	const RightIndexFinger 	= 2;
+	const LeftThumbFinger 	= 3;
+	const LeftIndexFinger 	= 4;
+	
 	// Remove marcador
 	// Dado um id, o marcador correspondente é removido.
 	// Se a operação for realizada com sucesso, retorna-se true, caso
@@ -59,9 +65,6 @@ private:
 	
 	// thread do kernel
 	pthread_t kthread;
-	
-	// tipos de marcadores
-	// -> adicionar os tipos aqui
 	
 	// Frame atual em RGB
 	IplImage* frame;
