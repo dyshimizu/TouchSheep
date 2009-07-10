@@ -10,8 +10,8 @@ class Teste: public TSListener{
 	
 	void performed (TSEvent* e){
 		if(!ok){
-			app->addTSMarker(358, 74, 414, 97, 1);
-			app->addTSMarker(339, 346, 410, 391, 2);
+			app->addTSMarker(335, 76, 369, 97, 1);
+			app->addTSMarker(326, 368, 389, 410, 2);
 			ok = true;
 		}
 		MarkerList list;
@@ -27,14 +27,12 @@ class Teste: public TSListener{
 
 int main(){
 	//CvCapture *cam = cvCaptureFromCAM(0);
-	// Azul: (358, 74) (414, 97)
-	// Vermelho: (339, 346) (410, 391)
 	
 	ok = false;
 	
 	cvNamedWindow("Teste");
 	
-	CvCapture *cam = cvCreateFileCapture("video01.mpg");
+	CvCapture *cam = cvCreateFileCapture("video.mpg");
 	if(!cam)
 		return 0;
 	
