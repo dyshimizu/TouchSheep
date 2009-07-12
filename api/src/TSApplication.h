@@ -26,10 +26,10 @@ public:
 	int addTSMarker (int x1, int y1, int x2, int y2, int markerType);
 	
 	// Tipos de marcadores
-	const RightThumbFinger 	= 1;
-	const RightIndexFinger 	= 2;
-	const LeftThumbFinger 	= 3;
-	const LeftIndexFinger 	= 4;
+	static int RightThumbFinger;
+	static int RightIndexFinger;
+	static int LeftThumbFinger;
+	static int LeftIndexFinger;
 	
 	// Remove marcador
 	// Dado um id, o marcador correspondente é removido.

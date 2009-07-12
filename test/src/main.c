@@ -1,5 +1,6 @@
 #include "TSApplication.h"
 #include "TSListener.h"
+#include "TSTouchMarkerListener.h"
 
 #include "stdio.h"
 
@@ -17,10 +18,10 @@ class Teste: public TSListener{
 		MarkerList list;
 		list = e->markerList;
 		while(list){
-			cvEllipseBox(e->img, list->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+			//cvEllipseBox(e->img, list->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
 			list = list->next;
 		}
-		cvShowImage("Teste", e->img);
+		//cvShowImage("Teste", e->img);
 	}
 	
 };
@@ -30,7 +31,7 @@ int main(){
 	
 	ok = false;
 	
-	cvNamedWindow("Teste");
+	//cvNamedWindow("Teste");
 	
 	CvCapture *cam = cvCreateFileCapture("video.mpg");
 	if(!cam)
@@ -41,7 +42,10 @@ int main(){
 	TSListener* l;
 	l = new Teste();
 	
-	app->addTSListener(l);
+	TSTouchMarkerListener* l2;
+	l2 = new TSTouchMarkerListener(1,2); 
+	
+	app->addTSListener(l2);
 	
 	int i;
 	i = app->start();

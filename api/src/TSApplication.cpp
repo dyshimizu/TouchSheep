@@ -1,5 +1,10 @@
 #include "TSApplication.h"
 
+int TSApplication::RightThumbFinger = 1;
+int TSApplication::RightIndexFinger = 2;
+int TSApplication::LeftThumbFinger  = 3;
+int TSApplication::LeftIndexFinger  = 4;
+
 // Necessário para o callback do kernel
 void fcallback (IplImage* img, MarkerList list);
 TSApplication *TSAPPLICATIONPOINTERTOCALLBACK;

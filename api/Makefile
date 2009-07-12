@@ -13,11 +13,15 @@ RELEASE       = release
 
 SOURCES       = $(SOURCE)/TSApplication.cpp \
                 $(SOURCE)/TSListener.cpp \
-                $(SOURCE)/TSEvent.cpp
+                $(SOURCE)/TSEvent.cpp \
+                $(SOURCE)/TSTouchMarkerListener.cpp \
+                $(SOURCE)/TSTouchMarkerEvent.cpp
 
 OBJECTS       = $(RELEASE)/TSApplication.o \
                 $(RELEASE)/TSListener.o \
-                $(RELEASE)/TSEvent.o
+                $(RELEASE)/TSEvent.o \
+                $(RELEASE)/TSTouchMarkerListener.o \
+                $(RELEASE)/TSTouchMarkerEvent.o
                 
 TARGET        = $(RELEASE)/libtsapi.so
 
@@ -43,6 +47,12 @@ $(RELEASE)/TSListener.o: $(SOURCE)/TSListener.cpp
 $(RELEASE)/TSEvent.o: $(SOURCE)/TSEvent.cpp
 	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSEvent.o $(SOURCE)/TSEvent.cpp
 
+$(RELEASE)/TSTouchMarkerListener.o: $(SOURCE)/TSTouchMarkerListener.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSTouchMarkerListener.o $(SOURCE)/TSTouchMarkerListener.cpp
+
+$(RELEASE)/TSTouchMarkerEvent.o: $(SOURCE)/TSTouchMarkerEvent.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSTouchMarkerEvent.o $(SOURCE)/TSTouchMarkerEvent.cpp
+
 ####### Install
 .PHONY : install
 
@@ -51,6 +61,8 @@ install:
 	cp $(SOURCE)/TSApplication.h $(INCLUDEDIR)/TSApplication.h
 	cp $(SOURCE)/TSListener.h $(INCLUDEDIR)/TSListener.h
 	cp $(SOURCE)/TSEvent.h $(INCLUDEDIR)/TSEvent.h
+	cp $(SOURCE)/TSTouchMarkerListener.h $(INCLUDEDIR)/TSTouchMarkerListener.h
+	cp $(SOURCE)/TSTouchMarkerEvent.h $(INCLUDEDIR)/TSTouchMarkerEvent.h
 	ldconfig
 	@echo Instalado com sucesso!
 
