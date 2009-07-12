@@ -15,10 +15,14 @@ public:
 	// Destrutor
 	virtual ~TSTouchMarkerListener ();
 	
-	void touchPerformed(TSTouchMarkerEvent* e);
+	virtual void touchPerformed(TSTouchMarkerEvent* e);
 	
 	// performed da classe pai TSListener
 	void performed (TSEvent* e);
+
+private:
+	int marker1Id;
+	int marker2Id;
 	
 };
 
