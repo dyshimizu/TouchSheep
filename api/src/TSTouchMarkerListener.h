@@ -18,6 +18,9 @@ public:
 	// Chamado quando os marcadores se tocam
 	virtual void touchPerformed(TSTouchMarkerEvent* e);
 	
+	// Chamado quando os marcadores se desencostam
+	virtual void releasePerformed(TSTouchMarkerEvent* e);
+	
 	// Chamado a cada frame e retorna a distância dos centros de cada marcador
 	virtual void distancePerformed(TSTouchMarkerEvent* e);
 	
@@ -27,6 +30,8 @@ public:
 private:
 	int marker1Id;
 	int marker2Id;
+	bool touch;
+	bool release;
 	
 };
 

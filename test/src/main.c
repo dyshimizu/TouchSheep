@@ -18,6 +18,10 @@ public:
 		printf("toquei!\n");
 	}
 	
+	void releasePerformed(TSTouchMarkerEvent* e){
+		printf("soltei!\n");
+	}
+	
 	void distancePerformed (TSTouchMarkerEvent* e){
 		if(!ok){
 			app->addTSMarker(335, 76, 369, 97, 1);

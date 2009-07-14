@@ -5,6 +5,7 @@
 TSTouchMarkerListener::TSTouchMarkerListener(int marker1, int marker2){
 	marker1Id = marker1;
 	marker2Id = marker2;
+	touch = false;
 }
 
 void TSTouchMarkerListener::performed (TSEvent* e){
@@ -60,32 +61,49 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 		// tratamento de colisão simples
 		// na verdade é uma possível colisão, pois leva-se em conta somente o retângulo
 		// que engloba o marcador, e não o marcador em si.
+		release = true;
 		if(p1Marker2.x > p1Marker1.x && p1Marker2.y > p1Marker1.y && 
 		   p1Marker2.x < p2Marker1.x && p1Marker2.y < p2Marker1.y){
+			touch = true;
+			release = false;
 			touchPerformed(event);
 		}else{
 			if(p2Marker2.x > p1Marker1.x && p2Marker2.y > p1Marker1.y && 
 			   p2Marker2.x < p2Marker1.x && p2Marker2.y < p2Marker1.y){
+				touch = true;
+				release = false;
 				touchPerformed(event);
 			}else{
 				if(p1Marker1.x > p1Marker2.x && p1Marker1.y > p1Marker2.y && 
 				   p1Marker1.x < p2Marker2.x && p1Marker1.y < p2Marker2.y){
+					touch = true;
+					release = false;
 					touchPerformed(event);
 				}else{
 					if(p2Marker1.x > p1Marker2.x && p2Marker1.y > p1Marker2.y && 
 					   p2Marker1.x < p2Marker2.x && p2Marker1.y < p2Marker2.y){
+						touch = true;
+						release = false;
 						touchPerformed(event);
 					}
 				}
 			}
 		}
 		
+		if(release && touch){
+			touch = false;
+			releasePerformed(event);
+		}
 		
 	}
 	delete event;
 }
 
 void TSTouchMarkerListener::touchPerformed(TSTouchMarkerEvent* e){
+	
+}
+
+void TSTouchMarkerListener::releasePerformed(TSTouchMarkerEvent* e){
 	
 }
 
