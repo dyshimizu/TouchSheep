@@ -28,22 +28,24 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 		m = m->next;
 	}
 	
-	event->marker1 = marker1;
-	event->marker2 = marker2;
-	
-	// distância
-	float distance;
-	float d1 = (marker1->track_box.center.x)-(marker2->track_box.center.x);
-	float d2 = (marker1->track_box.center.y)-(marker2->track_box.center.y);
-	distance = sqrt(d1*d1 + d2*d2);
-	event->distance = distance;
-	
-	event->d.x = (marker2->track_box.center.x - marker1->track_box.center.x)/2 + marker1->track_box.center.x;
-	event->d.y = (marker2->track_box.center.y - marker1->track_box.center.y)/2 + marker1->track_box.center.y;
-	distancePerformed(event);
-	
-	// proximidade de marker1 e marker2
-	
+	if(marker1 && marker2){
+		event->marker1 = marker1;
+		event->marker2 = marker2;
+
+		// distância
+		float distance;
+		float d1 = (marker1->track_box.center.x)-(marker2->track_box.center.x);
+		float d2 = (marker1->track_box.center.y)-(marker2->track_box.center.y);
+		distance = sqrt(d1*d1 + d2*d2);
+		event->distance = distance;
+
+		event->d.x = (marker2->track_box.center.x - marker1->track_box.center.x)/2 + marker1->track_box.center.x;
+		event->d.y = (marker2->track_box.center.y - marker1->track_box.center.y)/2 + marker1->track_box.center.y;
+		distancePerformed(event);
+
+		// proximidade de marker1 e marker2
+	}
+	delete event;
 }
 
 void TSTouchMarkerListener::touchPerformed(TSTouchMarkerEvent* e){
