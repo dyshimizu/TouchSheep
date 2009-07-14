@@ -14,6 +14,10 @@ public:
 		
 	}
 	
+	void touchPerformed(TSTouchMarkerEvent* e){
+		printf("toquei!\n");
+	}
+	
 	void distancePerformed (TSTouchMarkerEvent* e){
 		if(!ok){
 			app->addTSMarker(335, 76, 369, 97, 1);
@@ -27,11 +31,21 @@ public:
 		//	list = list->next;
 		//}
 		
-		cvEllipseBox(e->img, e->marker1->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
-		cvEllipseBox(e->img, e->marker2->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
-		
 		CvPoint p1;
 		CvPoint p2;
+		cvEllipseBox(e->img, e->marker1->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+		p1.x = e->marker1->position.x;
+		p1.y = e->marker1->position.y;
+		p2.x = e->marker1->position.x + e->marker1->position.width;
+		p2.y = e->marker1->position.y + e->marker1->position.height;
+		cvRectangle(e->img, p1, p2, CV_RGB(255,0,0), 3, CV_AA, 0);
+		cvEllipseBox(e->img, e->marker2->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+		p1.x = e->marker2->position.x;
+		p1.y = e->marker2->position.y;
+		p2.x = e->marker2->position.x + e->marker2->position.width;
+		p2.y = e->marker2->position.y + e->marker2->position.height;
+		cvRectangle(e->img, p1, p2, CV_RGB(255,0,0), 3, CV_AA, 0);
+		
 		p1.x = e->d.x -10;
 		p1.y = e->d.y -10;
 		p2.x = e->d.x +10;
