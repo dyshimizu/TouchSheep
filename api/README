@@ -20,6 +20,12 @@ programas em C/C++.
     Classe Base que pode ser adicionada em uma TSApplication e é acionada a cada frame
   capturado. É base para outros listeners que poderão reagir a eventos diferentes.
 
+  - TSTouchMarkerEvent
+    Evento de marcadores que se tocam.
+
+  - TSTouchMarkerListener
+    Listener que escuta marcadores que se tocam.
+
   Para utilizá-la você deve compilá-la e instalá-la. Para isso veja o item "Compilando
 e Instalando". Após isso é só incluir o cabeçalho em seu programa e utilizá-la.
 
