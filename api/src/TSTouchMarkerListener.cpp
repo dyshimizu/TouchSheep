@@ -22,11 +22,17 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 		}
 		m = m->next;
 	}
+	// calcula distância de marker1 e marker2
+	
 	// proximidade de marker1 e marker2
 	
 }
 
 void TSTouchMarkerListener::touchPerformed(TSTouchMarkerEvent* e){
+	
+}
+
+void TSTouchMarkerListener::distancePerformed(TSTouchMarkerEvent* e){
 	
 }
 

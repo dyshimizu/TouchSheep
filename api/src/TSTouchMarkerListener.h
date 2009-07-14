@@ -15,7 +15,11 @@ public:
 	// Destrutor
 	virtual ~TSTouchMarkerListener ();
 	
+	// Chamado quando os marcadores se tocam
 	virtual void touchPerformed(TSTouchMarkerEvent* e);
+	
+	// Chamado a cada frame e retorna a distância dos centros de cada marcador
+	virtual void distancePerformed(TSTouchMarkerEvent* e);
 	
 	// performed da classe pai TSListener
 	void performed (TSEvent* e);

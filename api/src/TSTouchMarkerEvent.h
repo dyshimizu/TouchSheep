@@ -11,8 +11,9 @@ public:
 	TSTouchMarkerEvent ();
 	virtual ~TSTouchMarkerEvent ();
 	
-	IplImage* img;
-	MarkerList markerList;
+	float distance;
+	CvPoint d;	
+	
 };
 
 #endif
