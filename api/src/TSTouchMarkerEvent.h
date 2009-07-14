@@ -11,6 +11,9 @@ public:
 	TSTouchMarkerEvent ();
 	virtual ~TSTouchMarkerEvent ();
 	
+	Marker marker1;
+	Marker marker2;
+	
 	float distance;
 	CvPoint d;	
 	
