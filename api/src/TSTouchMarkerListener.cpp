@@ -33,8 +33,9 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 	
 	// distância
 	float distance;
-	distance = sqrt((marker1->track_box.center.x)*(marker1->track_box.center.x) + 
-					(marker2->track_box.center.y)*(marker2->track_box.center.y));
+	float d1 = (marker1->track_box.center.x)-(marker2->track_box.center.x);
+	float d2 = (marker1->track_box.center.y)-(marker2->track_box.center.y);
+	distance = sqrt(d1*d1 + d2*d2);
 	event->distance = distance;
 	
 	// proximidade de marker1 e marker2
