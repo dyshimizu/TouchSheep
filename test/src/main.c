@@ -7,21 +7,38 @@
 bool ok;
 TSApplication* app;
 
-class Teste: public TSListener{
+class Teste: public TSTouchMarkerListener{
 	
-	void performed (TSEvent* e){
+public:
+	Teste(int marker1, int marker2): TSTouchMarkerListener (marker1, marker2){
+		
+	}
+	
+	void distancePerformed (TSTouchMarkerEvent* e){
 		if(!ok){
 			app->addTSMarker(335, 76, 369, 97, 1);
 			app->addTSMarker(326, 368, 389, 410, 2);
 			ok = true;
 		}
-		MarkerList list;
-		list = e->markerList;
-		while(list){
-			//cvEllipseBox(e->img, list->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
-			list = list->next;
-		}
-		//cvShowImage("Teste", e->img);
+		//MarkerList list;
+		//list = e->markerList;
+		//while(list){
+		//	cvEllipseBox(e->img, list->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+		//	list = list->next;
+		//}
+		
+		cvEllipseBox(e->img, e->marker1->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+		cvEllipseBox(e->img, e->marker2->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
+		
+		CvPoint p1;
+		CvPoint p2;
+		p1.x = e->d.x -10;
+		p1.y = e->d.y -10;
+		p2.x = e->d.x +10;
+		p2.y = e->d.y +10;
+		cvRectangle(e->img, p1, p2, CV_RGB(255,0,0), 3, CV_AA, 0);
+		
+		cvShowImage("Teste", e->img);
 	}
 	
 };
@@ -31,7 +48,7 @@ int main(){
 	
 	ok = false;
 	
-	//cvNamedWindow("Teste");
+	cvNamedWindow("Teste");
 	
 	CvCapture *cam = cvCreateFileCapture("video.mpg");
 	if(!cam)
@@ -40,12 +57,9 @@ int main(){
 	app = new TSApplication(cam, 30, 10, 256, 30);
 	
 	TSListener* l;
-	l = new Teste();
+	l = new Teste(0,1);
 	
-	TSTouchMarkerListener* l2;
-	l2 = new TSTouchMarkerListener(1,2); 
-	
-	app->addTSListener(l2);
+	app->addTSListener(l);
 	
 	int i;
 	i = app->start();
