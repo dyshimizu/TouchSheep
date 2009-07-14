@@ -1,6 +1,6 @@
 #include "TSTouchMarkerListener.h"
 
-#include <stdio.h>
+#include <math.h>
 
 TSTouchMarkerListener::TSTouchMarkerListener(int marker1, int marker2){
 	marker1Id = marker1;
@@ -8,6 +8,11 @@ TSTouchMarkerListener::TSTouchMarkerListener(int marker1, int marker2){
 }
 
 void TSTouchMarkerListener::performed (TSEvent* e){
+	TSTouchMarkerEvent *event;
+	event = new TSTouchMarkerEvent();
+	event->img = e->img;
+	event->markerList = e->markerList;
+	
 	Marker* marker1;
 	Marker* marker2;
 	Marker* m;
@@ -22,7 +27,15 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 		}
 		m = m->next;
 	}
-	// calcula distância de marker1 e marker2
+	
+	event->marker1 = marker1;
+	event->marker2 = marker2;
+	
+	// distância
+	float distance;
+	distance = sqrt((marker1->track_box.center.x)*(marker1->track_box.center.x) + 
+					(marker2->track_box.center.y)*(marker2->track_box.center.y));
+	event->distance = distance;
 	
 	// proximidade de marker1 e marker2
 	
