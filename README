@@ -35,6 +35,8 @@
 
   TouchSheep é uma interface humano-computador baseada em visão
 computacional.
+  Esse software é distribuido sob a licença GPLv3. Para maiores 
+informações leia o arquivo COPYING.
 
 
 = Requisitos
@@ -44,8 +46,11 @@ computacional.
 
   Para Ubuntu Linux:
 
-    - Instalando ferramentas para compilação: sudo apt-get install build-essential
-    - Instalando opencv: sudo apt-get install libcv-dev
+    - Instalando ferramentas para compilação: 
+        sudo apt-get install build-essential
+
+    - Instalando opencv: 
+        sudo apt-get install libcv-dev
 
 = Estrutura
 
