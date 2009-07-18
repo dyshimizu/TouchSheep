@@ -4,7 +4,7 @@ CXX           = g++
 LINK          = g++
 DEL           = rm -R -f
 MKDIR         = mkdir -p
-INCPATH       = `pkg-config --cflags opencv`
+INCPATH       = `pkg-config --cflags opencv` -I/usr/local/include/TouchSheep
 LIBS          = `pkg-config --libs opencv` -ltskernel
 DOC           = doc
 SOURCE        = src
@@ -23,16 +23,16 @@ OBJECTS       = $(RELEASE)/TSApplication.o \
                 $(RELEASE)/TSTouchMarkerListener.o \
                 $(RELEASE)/TSTouchMarkerEvent.o
                 
-TARGET        = $(RELEASE)/libtsapi.so
+TARGET        = $(RELEASE)/libtscore.so
 
 INSTALLDIR    = /usr/local/lib
-INCLUDEDIR	  = /usr/local/include
+INCLUDEDIR	  = /usr/local/include/TouchSheep/TSCore
 
 ####### Compile
 all: $(TARGET)
 
 $(TARGET): dirrelease $(OBJECTS)
-	$(LINK) -shared -Wl,-soname,libtsapi.so $(INCPATH) $(LIBS) -o $(TARGET) $(OBJECTS)
+	$(LINK) -shared -Wl,-soname,libtscore.so $(INCPATH) $(LIBS) -o $(TARGET) $(OBJECTS)
 	@echo Build finalizado!
 
 dirrelease: 
@@ -58,6 +58,7 @@ $(RELEASE)/TSTouchMarkerEvent.o: $(SOURCE)/TSTouchMarkerEvent.cpp
 
 install:
 	cp $(TARGET) $(INSTALLDIR)/libtscore.so
+	@$(MKDIR) $(INCLUDEDIR)
 	cp $(SOURCE)/TSApplication.h $(INCLUDEDIR)/TSApplication.h
 	cp $(SOURCE)/TSListener.h $(INCLUDEDIR)/TSListener.h
 	cp $(SOURCE)/TSEvent.h $(INCLUDEDIR)/TSEvent.h

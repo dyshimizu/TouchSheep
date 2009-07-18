@@ -1,6 +1,6 @@
-#include "TSApplication.h"
-#include "TSListener.h"
-#include "TSTouchMarkerListener.h"
+#include "TSCore/TSApplication.h"
+#include "TSCore/TSListener.h"
+#include "TSCore/TSTouchMarkerListener.h"
 
 #include "stdio.h"
 

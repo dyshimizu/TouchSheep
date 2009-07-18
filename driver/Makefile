@@ -23,7 +23,7 @@ TARGET        = $(RELEASE)/libtskernel.so
 
 INSTALLDIR    = /usr/local/lib/libtskernel.so
 INCLUDE       = include/TSKernel.h
-INCLUDEDIR	  = /usr/local/include/TSKernel.h
+INCLUDEDIR	  = /usr/local/include/TouchSheep
 
 ####### Compile
 all: $(TARGET)
@@ -49,7 +49,8 @@ $(RELEASE)/Kernel.o: $(SOURCE)/Kernel.c
 
 install:
 	cp $(TARGET) $(INSTALLDIR)
-	cp $(INCLUDE) $(INCLUDEDIR)
+	@$(MKDIR) $(INCLUDEDIR)
+	cp $(INCLUDE) $(INCLUDEDIR)/TSKernel.h
 	ldconfig
 	@echo Instalado com sucesso!
 
