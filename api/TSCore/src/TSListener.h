@@ -28,7 +28,7 @@ public:
 	
 	virtual void performed (TSEvent* e);
 
-	void listening (IplImage* img, MarkerList markerList);
+	void listening (IplImage* img, MarkerList markerList);// TODO
 	
 };
 

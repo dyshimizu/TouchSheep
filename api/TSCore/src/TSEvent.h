@@ -24,8 +24,8 @@ public:
 	TSEvent ();
 	virtual ~TSEvent ();
 	
-	IplImage* img;
-	MarkerList markerList;
+	IplImage* img;// TODO
+	MarkerList markerList;// TODO
 };
 
 #endif

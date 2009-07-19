@@ -32,8 +32,8 @@ public:
 	TSTouchMarkerEvent ();
 	virtual ~TSTouchMarkerEvent ();
 	
-	Marker *marker1;
-	Marker *marker2;
+	Marker *marker1;// TODO
+	Marker *marker2;// TODO
 	
 	float distance;
 	TSPoint d;
