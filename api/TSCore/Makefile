@@ -76,6 +76,9 @@ uninstall:
 	rm $(INCLUDEDIR)/TSApplication.h
 	rm $(INCLUDEDIR)/TSListener.h
 	rm $(INCLUDEDIR)/TSEvent.h
+	rm $(INCLUDEDIR)/TSTouchMarkerListener.h
+	rm $(INCLUDEDIR)/TSTouchMarkerEvent.h
+	rm $(INCLUDEDIR)/TSMarker.h
 	@echo Removido com sucesso!
 
 ####### Clean

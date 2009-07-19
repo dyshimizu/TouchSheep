@@ -5,13 +5,16 @@ API CORE
   A API foi desenvolvida com o objetivo de facilitar o desenvolvimento de aplicações
 que utilizem a interface humano-computador TouchSheep.
 
-  Esta API é fornecida como uma shared library chamada libtsapi.so e cabeçalhos para
+  Esta API é fornecida como uma shared library chamada libtscore.so e cabeçalhos para
 programas em C/C++.
 
   As classes, e seus respectivos cabeçalhos são listados abaixo:
 
   - TSApplication
     Classe que implementa a base de uma aplicação TouchSheep
+
+  - TSMarker
+    Classe que contêm informações sobre os marcadores
 
   - TSEvent
     Classe Base dos eventos gerados por listeners.
