@@ -64,15 +64,15 @@ public:
 int main(){
 	//CvCapture *cam = cvCaptureFromCAM(0);
 	
-	ok = false;
+	//ok = false;
 	
 	cvNamedWindow("Teste");
 	
-	CvCapture *cam = cvCreateFileCapture("video.mpg");
-	if(!cam)
-		return 0;
+	//CvCapture *cam = cvCreateFileCapture("video.mpg");
+	//if(!cam)
+	//	return 0;
 	
-	app = new TSApplication(cam, 30, 10, 256, 30);
+	app = new TSApplication("video.mpg", 30, 10, 256, 30);
 	
 	TSListener* l;
 	l = new Teste(0,1);

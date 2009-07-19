@@ -21,8 +21,6 @@
 
 #include "TSKernel.h"
 
-#include "highgui.h"
-
 #include <pthread.h>
 
 #include "TSListener.h"
@@ -31,9 +29,14 @@ class TSApplication
 {
 public:
 	// Construtor
-	// Inicia uma aplicação TouchSheep utilizando como entrada
-	// o cvCapture passado por parâmetro
-	TSApplication (CvCapture* cvCapture, int refresh, int vmin, int vmax, int smin);
+	// Inicia uma aplicação TouchSheep utilizando como dispositivo de
+	// entrada uma câmera
+	TSApplication (int cam, int refresh, int vmin, int vmax, int smin);
+	
+	// Construtor
+	// Inicia uma aplicação TouchSheep utilizando como dispositivo de
+	// entrada um arquivo de video
+	TSApplication (const char* filename, int refresh, int vmin, int vmax, int smin);
 	
 	// Adiciona marcador
 	// Dada TSMarker, é adicionado um marcador de id

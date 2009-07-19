@@ -24,7 +24,7 @@ int TSApplication::LeftIndexFinger  = 4;
 void fcallback (IplImage* img, MarkerList list);
 TSApplication *TSAPPLICATIONPOINTERTOCALLBACK;
 
-TSApplication::TSApplication (CvCapture* cvCapture, int refresh, int vmin, int vmax, int smin){
+TSApplication::TSApplication (int cam, int refresh, int vmin, int vmax, int smin){
 	
 	TSAPPLICATIONPOINTERTOCALLBACK = this;
 	frame = NULL;
@@ -32,6 +32,27 @@ TSApplication::TSApplication (CvCapture* cvCapture, int refresh, int vmin, int v
 	hue = NULL;
 	mask = NULL;
 	hist = NULL;
+	
+	CvCapture *cvCapture = cvCaptureFromCAM(0);
+	
+	p.thread_id = 1;
+	p.capture = cvCapture;
+	p.handle = &fcallback;
+	p.refresh = refresh;
+	p.vmin = vmin;
+	p.vmax = vmax;
+	p.smin = smin;
+}
+
+TSApplication::TSApplication (const char* filename, int refresh, int vmin, int vmax, int smin){
+	TSAPPLICATIONPOINTERTOCALLBACK = this;
+	frame = NULL;
+	frameHSV = NULL;
+	hue = NULL;
+	mask = NULL;
+	hist = NULL;
+	
+	CvCapture *cvCapture = cvCreateFileCapture(filename);
 	
 	p.thread_id = 1;
 	p.capture = cvCapture;
