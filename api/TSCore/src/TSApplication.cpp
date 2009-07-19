@@ -112,10 +112,31 @@ void TSApplication::handle (IplImage* img, MarkerList markerList){
 	frame = img;
 	cvCvtColor(img, frameHSV, CV_BGR2HSV);
 	
+	Marker* m;
+	m = markerList;
+	while(m){
+		TSMarker* tsMarker = new TSMarker;
+		tsMarker->id = m->id;
+		tsMarker->markerType = m->markerType;
+		tsMarker->position.x = m->position.x;
+		tsMarker->position.y = m->position.y;
+		tsMarker->position.width = m->position.width;
+		tsMarker->position.height = m->position.height;
+		tsMarker->track_box.center.x = m->track_box.center.x;
+		tsMarker->track_box.center.y = m->track_box.center.y;
+		tsMarker->track_box.size.width = m->track_box.size.width;
+		tsMarker->track_box.size.height = m->track_box.size.height;
+		tsMarker->track_box.angle = m->track_box.angle;
+		tsMarkerList.push_back(tsMarker);
+		m = m->next;
+	}
+	
 	std::list<TSListener*>::iterator it;
 	for ( it=tsListenerList.begin() ; it != tsListenerList.end(); it++ ){
-		(*it)->listening(img, markerList);
+		(*it)->listening(img, tsMarkerList);
 	}
+	
+	tsMarkerList.clear();
 }
 
 TSApplication::~TSApplication (){

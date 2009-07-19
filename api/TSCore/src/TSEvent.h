@@ -16,7 +16,12 @@
 #ifndef TSEVENT_H
 #define TSEVENT_H
 
+#include <list>
+#include <stdio.h>
+
 #include "TSKernel.h"
+
+#include "TSMarker.h"
 
 class TSEvent
 {
@@ -25,7 +30,7 @@ public:
 	virtual ~TSEvent ();
 	
 	IplImage* img;// TODO
-	MarkerList markerList;// TODO
+	std::list<TSMarker*> tsMarkerList;
 };
 
 #endif

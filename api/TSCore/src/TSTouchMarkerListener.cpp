@@ -14,6 +14,7 @@
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "TSTouchMarkerListener.h"
+#include "TSMarker.h"
 
 #include <math.h>
 
@@ -27,23 +28,21 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 	TSTouchMarkerEvent *event;
 	event = new TSTouchMarkerEvent();
 	event->img = e->img;
-	event->markerList = e->markerList;
+	event->tsMarkerList = e->tsMarkerList;
 	
-	Marker* marker1;
-	Marker* marker2;
-	Marker* m;
-	m = e->markerList;
-	while(m){
-		if(m->id == marker1Id){
-			marker1 = m;
+	TSMarker* marker1;
+	TSMarker* marker2;
+	std::list<TSMarker*>::iterator it;
+	for ( it=e->tsMarkerList.begin() ; it != e->tsMarkerList.end(); it++ ){
+		if((*it)->id == marker1Id){
+			marker1 = (*it);
 		}else{
-			if(m->id == marker2Id){
-				marker2 = m;
+			if((*it)->id == marker2Id){
+				marker2 = (*it);
 			}
 		}
-		m = m->next;
 	}
-	
+		
 	if(marker1 && marker2){
 		event->marker1 = marker1;
 		event->marker2 = marker2;

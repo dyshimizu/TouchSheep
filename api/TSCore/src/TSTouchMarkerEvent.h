@@ -20,6 +20,8 @@
 
 #include "TSEvent.h"
 
+#include "TSMarker.h"
+
 class TSPoint{
 public:
 	int x;
@@ -32,8 +34,8 @@ public:
 	TSTouchMarkerEvent ();
 	virtual ~TSTouchMarkerEvent ();
 	
-	Marker *marker1;// TODO
-	Marker *marker2;// TODO
+	TSMarker *marker1;
+	TSMarker *marker2;
 	
 	float distance;
 	TSPoint d;

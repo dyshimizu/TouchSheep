@@ -15,7 +15,7 @@
 
 #include "TSListener.h"
 
-#include "stdio.h"
+#include <stdio.h>
 
 TSListener::TSListener (){
 	
@@ -29,10 +29,10 @@ void TSListener::performed (TSEvent* e){
 	
 }
 
-void TSListener::listening (IplImage* img, MarkerList markerList){
+void TSListener::listening (IplImage* img, std::list<TSMarker*> tsMarkerList){
 	TSEvent* e = new TSEvent();
 	e->img = img;
-	e->markerList = markerList;
+	e->tsMarkerList = tsMarkerList;
 	performed(e);
 	delete e;
 }

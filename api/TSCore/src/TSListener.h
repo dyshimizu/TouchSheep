@@ -16,9 +16,14 @@
 #ifndef TSLISTENER_H
 #define TSLISTENER_H
 
+#include <stdio.h>
+#include <list>
+
 #include "TSKernel.h"
 
 #include "TSEvent.h"
+
+#include "TSMarker.h"
 
 class TSListener
 {
@@ -28,7 +33,7 @@ public:
 	
 	virtual void performed (TSEvent* e);
 
-	void listening (IplImage* img, MarkerList markerList);// TODO
+	void listening (IplImage* img, std::list<TSMarker*> tsMarkerList);// TODO
 	
 };
 

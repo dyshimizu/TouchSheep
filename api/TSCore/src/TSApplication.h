@@ -24,6 +24,7 @@
 #include <pthread.h>
 
 #include "TSListener.h"
+#include "TSMarker.h"
 
 class TSApplication
 {
@@ -98,6 +99,9 @@ private:
 	
 	// Histograma
 	CvHistogram *hist;
+	
+	// Lista de Marcadores
+	std::list<TSMarker*> tsMarkerList;
 	
 	// Lista de Listeners
 	std::list<TSListener*> tsListenerList;

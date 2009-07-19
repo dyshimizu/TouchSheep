@@ -64,6 +64,7 @@ install:
 	cp $(SOURCE)/TSEvent.h $(INCLUDEDIR)/TSEvent.h
 	cp $(SOURCE)/TSTouchMarkerListener.h $(INCLUDEDIR)/TSTouchMarkerListener.h
 	cp $(SOURCE)/TSTouchMarkerEvent.h $(INCLUDEDIR)/TSTouchMarkerEvent.h
+	cp $(SOURCE)/TSMarker.h $(INCLUDEDIR)/TSMarker.h
 	ldconfig
 	@echo Instalado com sucesso!
 
