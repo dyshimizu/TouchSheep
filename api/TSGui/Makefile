@@ -4,16 +4,16 @@ CXX           = g++
 LINK          = g++
 DEL           = rm -R -f
 MKDIR         = mkdir -p
-INCPATH       = `pkg-config --cflags opencv` -I/usr/local/include/TouchSheep
-LIBS          = `pkg-config --libs opencv` -ltskernel
+INCPATH       = `pkg-config --cflags gtk+-2.0`
+LIBS          = `pkg-config --libs gtk+-2.0`
 DOC           = doc
 SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/algo.cpp
+SOURCES       = $(SOURCE)/TSApplication.cpp
 
-OBJECTS       = $(RELEASE)/algo.o
+OBJECTS       = $(RELEASE)/TSApplication.o
                 
 TARGET        = $(RELEASE)/libtsgui.so
 
@@ -30,8 +30,8 @@ $(TARGET): dirrelease $(OBJECTS)
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/algo.o: $(SOURCE)/algo.cpp
-	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/algo.o $(SOURCE)/algo.cpp
+$(RELEASE)/TSApplication.o: $(SOURCE)/TSApplication.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSApplication.o $(SOURCE)/TSApplication.cpp
 
 ####### Install
 .PHONY : install
@@ -39,7 +39,7 @@ $(RELEASE)/algo.o: $(SOURCE)/algo.cpp
 install:
 	cp $(TARGET) $(INSTALLDIR)/libtsgui.so
 	@$(MKDIR) $(INCLUDEDIR)
-	cp $(SOURCE)/algo.h $(INCLUDEDIR)/algo.h
+	cp $(SOURCE)/TSApplication.h $(INCLUDEDIR)/TSApplication.h
 	ldconfig
 	@echo Instalado com sucesso!
 
@@ -48,7 +48,7 @@ install:
 
 uninstall:
 	rm $(INSTALLDIR)/libtsgui.so
-	rm $(INCLUDEDIR)/algo.h
+	rm $(INCLUDEDIR)/TSApplication.h
 	@echo Removido com sucesso!
 
 ####### Clean
