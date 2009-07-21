@@ -22,8 +22,8 @@
 #include "TSKernel.h"
 
 #include "TSEvent.h"
-
 #include "TSMarker.h"
+#include "TSImage.h"
 
 class TSListener
 {
@@ -33,7 +33,7 @@ public:
 	
 	virtual void performed (TSEvent* e);
 
-	void listening (IplImage* img, std::list<TSMarker*> tsMarkerList);// TODO
+	void listening (TSImage* img, std::list<TSMarker*> tsMarkerList);
 	
 };
 

@@ -73,7 +73,7 @@ public:
 	
 	// Handle chamado a cada laço do kernel
 	// Recebe cada frame e a lista de marcadores contendo suas posições
-	void handle (IplImage* img, MarkerList markerList); // TODO
+	void handle (IplImage* img, MarkerList markerList);
 	
 	// Destrutor
 	virtual ~TSApplication ();

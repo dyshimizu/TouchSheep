@@ -65,6 +65,7 @@ install:
 	cp $(SOURCE)/TSTouchMarkerListener.h $(INCLUDEDIR)/TSTouchMarkerListener.h
 	cp $(SOURCE)/TSTouchMarkerEvent.h $(INCLUDEDIR)/TSTouchMarkerEvent.h
 	cp $(SOURCE)/TSMarker.h $(INCLUDEDIR)/TSMarker.h
+	cp $(SOURCE)/TSMarker.h $(INCLUDEDIR)/TSImage.h
 	ldconfig
 	@echo Instalado com sucesso!
 
@@ -79,6 +80,7 @@ uninstall:
 	rm $(INCLUDEDIR)/TSTouchMarkerListener.h
 	rm $(INCLUDEDIR)/TSTouchMarkerEvent.h
 	rm $(INCLUDEDIR)/TSMarker.h
+	rm $(INCLUDEDIR)/TSImage.h
 	@echo Removido com sucesso!
 
 ####### Clean

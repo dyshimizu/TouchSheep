@@ -1,5 +1,4 @@
 #include "TSCore/TSApplication.h"
-#include "TSCore/TSListener.h"
 #include "TSCore/TSTouchMarkerListener.h"
 
 #include "stdio.h"
@@ -28,47 +27,12 @@ public:
 			app->addTSMarker(326, 368, 389, 410, 2);
 			ok = true;
 		}
-		//MarkerList list;
-		//list = e->markerList;
-		//while(list){
-		//	cvEllipseBox(e->img, list->track_box, CV_RGB(255,0,0), 3, CV_AA, 0 );
-		//	list = list->next;
-		//}
-		
-		CvPoint p1;
-		CvPoint p2;
-		p1.x = e->marker1->position.x;
-		p1.y = e->marker1->position.y;
-		p2.x = e->marker1->position.x + e->marker1->position.width;
-		p2.y = e->marker1->position.y + e->marker1->position.height;
-		cvRectangle(e->img, p1, p2, CV_RGB(255,0,0), 3, CV_AA, 0);
-		p1.x = e->marker2->position.x;
-		p1.y = e->marker2->position.y;
-		p2.x = e->marker2->position.x + e->marker2->position.width;
-		p2.y = e->marker2->position.y + e->marker2->position.height;
-		cvRectangle(e->img, p1, p2, CV_RGB(255,0,0), 3, CV_AA, 0);
-		
-		p1.x = e->d.x -10;
-		p1.y = e->d.y -10;
-		p2.x = e->d.x +10;
-		p2.y = e->d.y +10;
-		cvRectangle(e->img, p1, p2, CV_RGB(255,0,0), 3, CV_AA, 0);
-		
-		cvShowImage("Teste", e->img);
 	}
 	
 };
 
 int main(){
-	//CvCapture *cam = cvCaptureFromCAM(0);
-	
-	//ok = false;
-	
-	cvNamedWindow("Teste");
-	
-	//CvCapture *cam = cvCreateFileCapture("video.mpg");
-	//if(!cam)
-	//	return 0;
+	ok = false;
 	
 	app = new TSApplication("video.mpg", 30, 10, 256, 30);
 	

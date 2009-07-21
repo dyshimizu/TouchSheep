@@ -13,8 +13,8 @@
 //     You should have received a copy of the GNU General Public License
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TSImage_H
-#define TSImage_H
+#ifndef TSIMAGE_H
+#define TSIMAGE_H
 
 class TSImage {
 public:
