@@ -8,27 +8,6 @@ que utilizem a interface humano-computador TouchSheep.
   Esta API é fornecida como uma shared library chamada libtscore.so e cabeçalhos para
 programas em C/C++.
 
-  As classes, e seus respectivos cabeçalhos são listados abaixo:
-
-  - TSApplication
-    Classe que implementa a base de uma aplicação TouchSheep
-
-  - TSMarker
-    Classe que contêm informações sobre os marcadores
-
-  - TSEvent
-    Classe Base dos eventos gerados por listeners.
-
-  - TSListener
-    Classe Base que pode ser adicionada em uma TSApplication e é acionada a cada frame
-  capturado. É base para outros listeners que poderão reagir a eventos diferentes.
-
-  - TSTouchMarkerEvent
-    Evento de marcadores que se tocam.
-
-  - TSTouchMarkerListener
-    Listener que escuta marcadores que se tocam.
-
   Para utilizá-la você deve compilá-la e instalá-la. Para isso veja o item "Compilando
 e Instalando". Após isso é só incluir o cabeçalho em seu programa e utilizá-la.
 
