@@ -13,19 +13,19 @@
 //     You should have received a copy of the GNU General Public License
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "TSApplication.h"
+#include "TouchSheep.h"
 #include "TSImage.h"
 
-int TSApplication::RightThumbFinger = 1;
-int TSApplication::RightIndexFinger = 2;
-int TSApplication::LeftThumbFinger  = 3;
-int TSApplication::LeftIndexFinger  = 4;
+int TouchSheep::RightThumbFinger = 1;
+int TouchSheep::RightIndexFinger = 2;
+int TouchSheep::LeftThumbFinger  = 3;
+int TouchSheep::LeftIndexFinger  = 4;
 
 // Necessário para o callback do kernel
 void fcallback (IplImage* img, MarkerList list);
-TSApplication *TSAPPLICATIONPOINTERTOCALLBACK;
+TouchSheep *TSAPPLICATIONPOINTERTOCALLBACK;
 
-TSApplication::TSApplication (int cam, int refresh, int vmin, int vmax, int smin){
+TouchSheep::TouchSheep (int cam, int refresh, int vmin, int vmax, int smin){
 	
 	TSAPPLICATIONPOINTERTOCALLBACK = this;
 	frame = NULL;
@@ -47,7 +47,7 @@ TSApplication::TSApplication (int cam, int refresh, int vmin, int vmax, int smin
 	p.smin = smin;
 }
 
-TSApplication::TSApplication (const char* filename, int refresh, int vmin, int vmax, int smin){
+TouchSheep::TouchSheep (const char* filename, int refresh, int vmin, int vmax, int smin){
 	TSAPPLICATIONPOINTERTOCALLBACK = this;
 	frame = NULL;
 	frameHSV = NULL;
@@ -68,7 +68,7 @@ TSApplication::TSApplication (const char* filename, int refresh, int vmin, int v
 	p.smin = smin;
 }
 
-int TSApplication::addTSMarker (int x1, int y1, int x2, int y2, int markerType){
+int TouchSheep::addTSMarker (int x1, int y1, int x2, int y2, int markerType){
 	if(frame == NULL)
 		return -1;
 	
@@ -88,27 +88,27 @@ int TSApplication::addTSMarker (int x1, int y1, int x2, int y2, int markerType){
     addMarker(markerType, selection, hist);
 }
 
-bool TSApplication::removeTSMarker (int id){
+bool TouchSheep::removeTSMarker (int id){
 	removeMarker(id);
 }
 
-int TSApplication::start (){
+int TouchSheep::start (){
 	return pthread_create(&kthread, NULL, kernelThread, (void *)&p);
 }
 
-void TSApplication::stop (){
+void TouchSheep::stop (){
 	stopKernelThread();
 }
 
-void TSApplication::addTSListener (TSListener* tsListener){
+void TouchSheep::addTSListener (TSListener* tsListener){
 	tsListenerList.push_back(tsListener);
 }
 
-void TSApplication::removeAllTSListeners (){
+void TouchSheep::removeAllTSListeners (){
 	tsListenerList.clear();
 }
 
-void TSApplication::handle (IplImage* img, MarkerList markerList){
+void TouchSheep::handle (IplImage* img, MarkerList markerList){
 	if(!frameHSV){
 		frameHSV = cvCreateImage( cvGetSize(img), 8, 3 );
 		hue = cvCreateImage( cvGetSize(img), 8, 1 );
@@ -156,7 +156,7 @@ void TSApplication::handle (IplImage* img, MarkerList markerList){
 	delete tsImage;
 }
 
-TSApplication::~TSApplication (){
+TouchSheep::~TouchSheep (){
 	stop();
 }
 

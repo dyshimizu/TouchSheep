@@ -1,4 +1,4 @@
-#include "TSCore/TSApplication.h"
+#include "TSCore/TouchSheep.h"
 #include "TSCore/TSTouchMarkerListener.h"
 
 #include <exception>
@@ -7,7 +7,7 @@ using namespace std;
 #include "stdio.h"
 
 bool ok;
-TSApplication* app;
+TouchSheep* app;
 
 class Teste: public TSTouchMarkerListener{
 	
@@ -38,7 +38,7 @@ int main(){
 	ok = false;
 	
 	try{
-		app = new TSApplication("video.mpg", 30, 10, 256, 30);
+		app = new TouchSheep("video.mpg", 30, 10, 256, 30);
 		
 		TSListener* l;
 		l = new Teste(0,1);

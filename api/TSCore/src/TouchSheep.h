@@ -13,8 +13,8 @@
 //     You should have received a copy of the GNU General Public License
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TSAPPLICATION_H
-#define TSAPPLICATION_H
+#ifndef TOUCHSHEEP_H
+#define TOUCHSHEEP_H
 
 #include <list>
 #include <stdio.h>
@@ -27,18 +27,18 @@
 #include "TSMarker.h"
 #include "TSCaptureException.h"
 
-class TSApplication
+class TouchSheep
 {
 public:
 	// Construtor
 	// Inicia uma aplicação TouchSheep utilizando como dispositivo de
 	// entrada uma câmera
-	TSApplication (int cam, int refresh, int vmin, int vmax, int smin);
+	TouchSheep (int cam, int refresh, int vmin, int vmax, int smin);
 	
 	// Construtor
 	// Inicia uma aplicação TouchSheep utilizando como dispositivo de
 	// entrada um arquivo de video
-	TSApplication (const char* filename, int refresh, int vmin, int vmax, int smin);
+	TouchSheep (const char* filename, int refresh, int vmin, int vmax, int smin);
 	
 	// Adiciona marcador
 	// Dada TSMarker, é adicionado um marcador de id
@@ -77,7 +77,7 @@ public:
 	void handle (IplImage* img, MarkerList markerList);
 	
 	// Destrutor
-	virtual ~TSApplication ();
+	virtual ~TouchSheep ();
 
 private:
 	// Parametros do kernel

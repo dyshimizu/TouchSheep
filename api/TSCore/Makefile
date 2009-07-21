@@ -11,13 +11,13 @@ SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/TSApplication.cpp \
+SOURCES       = $(SOURCE)/TouchSheep.cpp \
                 $(SOURCE)/TSListener.cpp \
                 $(SOURCE)/TSEvent.cpp \
                 $(SOURCE)/TSTouchMarkerListener.cpp \
                 $(SOURCE)/TSTouchMarkerEvent.cpp
 
-OBJECTS       = $(RELEASE)/TSApplication.o \
+OBJECTS       = $(RELEASE)/TouchSheep.o \
                 $(RELEASE)/TSListener.o \
                 $(RELEASE)/TSEvent.o \
                 $(RELEASE)/TSTouchMarkerListener.o \
@@ -38,8 +38,8 @@ $(TARGET): dirrelease $(OBJECTS)
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/TSApplication.o: $(SOURCE)/TSApplication.cpp
-	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSApplication.o $(SOURCE)/TSApplication.cpp
+$(RELEASE)/TouchSheep.o: $(SOURCE)/TouchSheep.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TouchSheep.o $(SOURCE)/TouchSheep.cpp
 	
 $(RELEASE)/TSListener.o: $(SOURCE)/TSListener.cpp
 	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSListener.o $(SOURCE)/TSListener.cpp
@@ -59,7 +59,7 @@ $(RELEASE)/TSTouchMarkerEvent.o: $(SOURCE)/TSTouchMarkerEvent.cpp
 install:
 	cp $(TARGET) $(INSTALLDIR)/libtscore.so
 	@$(MKDIR) $(INCLUDEDIR)
-	cp $(SOURCE)/TSApplication.h $(INCLUDEDIR)/TSApplication.h
+	cp $(SOURCE)/TouchSheep.h $(INCLUDEDIR)/TouchSheep.h
 	cp $(SOURCE)/TSListener.h $(INCLUDEDIR)/TSListener.h
 	cp $(SOURCE)/TSEvent.h $(INCLUDEDIR)/TSEvent.h
 	cp $(SOURCE)/TSTouchMarkerListener.h $(INCLUDEDIR)/TSTouchMarkerListener.h
@@ -75,7 +75,7 @@ install:
 
 uninstall:
 	rm $(INSTALLDIR)/libtscore.so
-	rm $(INCLUDEDIR)/TSApplication.h
+	rm $(INCLUDEDIR)/TouchSheep.h
 	rm $(INCLUDEDIR)/TSListener.h
 	rm $(INCLUDEDIR)/TSEvent.h
 	rm $(INCLUDEDIR)/TSTouchMarkerListener.h
