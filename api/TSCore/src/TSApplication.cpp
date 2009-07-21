@@ -112,6 +112,7 @@ void TSApplication::handle (IplImage* img, MarkerList markerList){
 	frame = img;
 	cvCvtColor(img, frameHSV, CV_BGR2HSV);
 	
+	// converte MarkerList para uma lista de TSMarker
 	Marker* m;
 	m = markerList;
 	while(m){
@@ -131,6 +132,7 @@ void TSApplication::handle (IplImage* img, MarkerList markerList){
 		m = m->next;
 	}
 	
+	// Chama os listeners cadastrados
 	std::list<TSListener*>::iterator it;
 	for ( it=tsListenerList.begin() ; it != tsListenerList.end(); it++ ){
 		(*it)->listening(img, tsMarkerList);
