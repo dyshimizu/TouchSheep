@@ -1,6 +1,9 @@
 #include "TSCore/TSApplication.h"
 #include "TSCore/TSTouchMarkerListener.h"
 
+#include <exception>
+using namespace std;
+
 #include "stdio.h"
 
 bool ok;
@@ -34,16 +37,20 @@ public:
 int main(){
 	ok = false;
 	
-	app = new TSApplication("video.mpg", 30, 10, 256, 30);
-	
-	TSListener* l;
-	l = new Teste(0,1);
-	
-	app->addTSListener(l);
-	
-	int i;
-	i = app->start();
-	
-	printf("%d", i);
-	scanf("%d",&i);
+	try{
+		app = new TSApplication("video.mpg", 30, 10, 256, 30);
+		
+		TSListener* l;
+		l = new Teste(0,1);
+
+		app->addTSListener(l);
+
+		int i;
+		i = app->start();
+
+		printf("%d", i);
+		scanf("%d",&i);
+	}catch(exception& e){
+		printf("%s\n", e.what());
+	}
 }

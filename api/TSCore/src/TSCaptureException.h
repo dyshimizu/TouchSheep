@@ -18,11 +18,13 @@
 
 #include <exception>
 
+using namespace std;
+
 class TSCaptureException: public exception {
 public:
 	virtual const char* what() const throw(){	
 	    return "Video Capture Error!";
 	}
-};
+} tsCaptureException;
 
 #endif

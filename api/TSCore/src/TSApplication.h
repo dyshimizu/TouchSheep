@@ -25,6 +25,7 @@
 
 #include "TSListener.h"
 #include "TSMarker.h"
+#include "TSCaptureException.h"
 
 class TSApplication
 {

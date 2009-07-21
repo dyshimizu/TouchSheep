@@ -35,6 +35,8 @@ TSApplication::TSApplication (int cam, int refresh, int vmin, int vmax, int smin
 	hist = NULL;
 	
 	CvCapture *cvCapture = cvCaptureFromCAM(0);
+	if(!cvCapture)
+		throw tsCaptureException;
 	
 	p.thread_id = 1;
 	p.capture = cvCapture;
@@ -54,6 +56,8 @@ TSApplication::TSApplication (const char* filename, int refresh, int vmin, int v
 	hist = NULL;
 	
 	CvCapture *cvCapture = cvCreateFileCapture(filename);
+	if(!cvCapture)
+		throw tsCaptureException;
 	
 	p.thread_id = 1;
 	p.capture = cvCapture;

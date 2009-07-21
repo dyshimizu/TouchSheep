@@ -11,7 +11,7 @@ SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/main.c
+SOURCES       = $(SOURCE)/main.cpp
 
 OBJECTS       = $(RELEASE)/main.o 
                 
@@ -27,8 +27,8 @@ $(TARGET): dirrelease $(OBJECTS)
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/main.o: $(SOURCE)/main.c
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.c
+$(RELEASE)/main.o: $(SOURCE)/main.cpp
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.cpp
 
 ####### Clean
 .PHONY : clean
