@@ -99,6 +99,34 @@ void TSTouchMarkerListener::performed (TSEvent* e){
 						touch = true;
 						release = false;
 						touchPerformed(event);
+					}else{
+						if(p1Marker2.x > p1Marker1.x && p2Marker2.y > p1Marker1.y && 
+							 p1Marker2.x < p2Marker1.x && p2Marker2.y < p2Marker1.y){
+							touch = true;
+							release = false;
+							touchPerformed(event);
+						}else{
+							if(p2Marker2.x > p1Marker1.x && p1Marker2.y > p1Marker1.y && 
+								 p2Marker2.x < p2Marker1.x && p1Marker2.y < p2Marker1.y){
+								touch = true;
+								release = false;
+								touchPerformed(event);
+							}else{
+								if(p1Marker1.x > p1Marker2.x && p2Marker1.y > p1Marker2.y && 
+									 p1Marker1.x < p2Marker2.x && p2Marker1.y < p2Marker2.y){
+									touch = true;
+									release = false;
+									touchPerformed(event);
+								}else{
+									if(p2Marker1.x > p1Marker2.x && p1Marker1.y > p1Marker2.y && 
+										 p2Marker1.x < p2Marker2.x && p1Marker1.y < p2Marker2.y){
+										touch = true;
+										release = false;
+										touchPerformed(event);
+									}
+								}
+							}
+						}
 					}
 				}
 			}
