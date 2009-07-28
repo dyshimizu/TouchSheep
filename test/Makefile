@@ -4,7 +4,8 @@ CXX           = g++
 LINK          = g++
 DEL           = rm -R -f
 MKDIR         = mkdir -p
-INCPATH       = `pkg-config --cflags opencv` -I/usr/local/include/TouchSheep
+INCPATH       = `pkg-config --cflags opencv` -I/usr/local/include/TouchSheep -I/usr/include/qt4/QtCore \
+ 				-I/usr/include/qt4/QtGui -I/usr/include/qt4
 LIBS          = `pkg-config --libs opencv`
 DOC           = doc
 SOURCE        = src

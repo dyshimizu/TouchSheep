@@ -1,6 +1,16 @@
+#include "TSGui/TSApplication.h"
+#include <QWidget>
 
 int main(int argc, char *argv[]){
+	TSApplication app(argc, argv);
 	
+	QWidget window;
+
+	window.resize(250, 150);
+	window.setWindowTitle("Simple example");
+	window.show();
+	
+	return app.exec();
 }
 
 //#include "TSCore/TSApplication.h"
