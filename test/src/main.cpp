@@ -1,9 +1,6 @@
-#include "TSGui/TSApplication.h"
 
 int main(int argc, char *argv[]){
-	TSApplication *app;
-	app = new TSApplication(argc, argv);
-	app->start();
+	
 }
 
 //#include "TSCore/TSApplication.h"
