@@ -65,8 +65,8 @@ install:
 	cp $(SOURCE)/TSTouchMarkerListener.h $(INCLUDEDIR)/TSTouchMarkerListener.h
 	cp $(SOURCE)/TSTouchMarkerEvent.h $(INCLUDEDIR)/TSTouchMarkerEvent.h
 	cp $(SOURCE)/TSMarker.h $(INCLUDEDIR)/TSMarker.h
-	cp $(SOURCE)/TSMarker.h $(INCLUDEDIR)/TSImage.h
-	cp $(SOURCE)/TSMarker.h $(INCLUDEDIR)/TSCaptureException.h
+	cp $(SOURCE)/TSImage.h $(INCLUDEDIR)/TSImage.h
+	cp $(SOURCE)/TSCaptureException.h $(INCLUDEDIR)/TSCaptureException.h
 	ldconfig
 	@echo Instalado com sucesso!
 

@@ -1,12 +1,35 @@
-#include "TSGui/TSApplication.h"
-#include "TSGui/TSImageDisplay.h"
-#include "TSCore/TSListener.h"
+#include <TSCore/TSImage.h>
+#include <TSGui/TSImageDisplay.h>
+
+#include <QApplication>
 #include <QWidget>
+#include <QLabel>
+#include <QImage>
+#include <QPixmap>
+
+#include <cv.h>
+#include <highgui.h>
 
 #include <stdio.h>
 
 int main(int argc, char *argv[]){
+	QApplication *app = new QApplication(argc, argv);
 	
+	IplImage *img = 0;
+	img = cvLoadImage( "foto1.jpg", CV_LOAD_IMAGE_UNCHANGED );
+	cvConvertImage(img, img, CV_CVTIMG_SWAP_RB);
+	TSImage *tsImage;
+	tsImage = new TSImage();
+	tsImage->imageData = img->imageData;
+	tsImage->width = img->width;
+	tsImage->height = img->height;
+	tsImage->widthStep = img->widthStep;
+	
+	TSImageDisplay *tsid = new TSImageDisplay();
+	tsid->setTSImage(tsImage);
+	tsid->show();
+	
+	app->exec();
 }
 
 //#include "TSCore/TSApplication.h"
