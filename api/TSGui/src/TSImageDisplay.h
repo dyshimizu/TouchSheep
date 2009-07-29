@@ -13,15 +13,16 @@
 //     You should have received a copy of the GNU General Public License
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef TSApplication_H
-#define TSApplication_H
+#ifndef TSImageDisplay_H
+#define TSImageDisplay_H
 
-#include <QApplication>
+#include <QLabel>
+#iclude "TSCore/TSImage.h"
 
-class TSApplication: public QApplication {
+class TSImageDisplay: public QLabel {
 public:
-	TSApplication(int argc, char **argv);
-	virtual ~TSApplication();
+	TSImageDisplay(TSImage* tsImage);
+	virtual ~TSImageDisplay();
 };
 
 #endif

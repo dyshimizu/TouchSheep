@@ -12,9 +12,9 @@ SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/TSApplication.cpp
+SOURCES       = $(SOURCE)/TSImageDisplay.cpp
 
-OBJECTS       = $(RELEASE)/TSApplication.o
+OBJECTS       = $(RELEASE)/TSImageDisplay.o
                 
 TARGET        = $(RELEASE)/libtsgui.so
 
@@ -31,8 +31,9 @@ $(TARGET): dirrelease $(OBJECTS)
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/TSApplication.o: $(SOURCE)/TSApplication.cpp
-	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSApplication.o $(SOURCE)/TSApplication.cpp
+$(RELEASE)/TSImageDisplay.o: $(SOURCE)/TSImageDisplay.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSImageDisplay.o $(SOURCE)/TSImageDisplay.cpp
+
 
 ####### Install
 .PHONY : install
@@ -40,7 +41,7 @@ $(RELEASE)/TSApplication.o: $(SOURCE)/TSApplication.cpp
 install:
 	cp $(TARGET) $(INSTALLDIR)/libtsgui.so
 	@$(MKDIR) $(INCLUDEDIR)
-	cp $(SOURCE)/TSApplication.h $(INCLUDEDIR)/TSApplication.h
+	cp $(SOURCE)/TSImageDisplay.h $(INCLUDEDIR)/TSImageDisplay.h
 	ldconfig
 	@echo Instalado com sucesso!
 
@@ -49,7 +50,7 @@ install:
 
 uninstall:
 	rm $(INSTALLDIR)/libtsgui.so
-	rm $(INCLUDEDIR)/TSApplication.h
+	rm $(INCLUDEDIR)/TSImageDisplay.h
 	@echo Removido com sucesso!
 
 ####### Clean
