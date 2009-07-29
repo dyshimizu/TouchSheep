@@ -57,8 +57,11 @@ public:
 	// contrário retorna-se false
 	bool removeTSMarker (int id);
 	
-	// Inicia o kernel TouchSheep
+	// Inicia o kernel TouchSheep em uma nova thread
 	int start ();
+	
+	// Inicia o kernel TouchSheep em um loop
+	void loop ();
 	
 	// Para o kernel TouchSheep
 	void stop ();

@@ -57,6 +57,8 @@ typedef struct{
 // Função usada para criar uma thread do loop do kernel
 void *kernelThread(void *threadarg);
 
+void kernelLoop(CvCapture* capture, void handle(IplImage*, MarkerList), int refresh, int vmin, int vmax, int smin);
+
 // Para a thread kernelLoop
 void stopKernelThread();
 

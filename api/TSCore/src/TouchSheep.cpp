@@ -96,6 +96,10 @@ int TouchSheep::start (){
 	return pthread_create(&kthread, NULL, kernelThread, (void *)&p);
 }
 
+void TouchSheep::loop (){
+	kernelLoop(p.capture, p.handle, p.refresh, p.vmin, p.vmax, p.smin);
+}
+
 void TouchSheep::stop (){
 	stopKernelThread();
 }
