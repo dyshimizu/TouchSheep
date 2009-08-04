@@ -1,37 +1,118 @@
-#include <TSCore/TSImage.h>
+#include <QApplication>
+#include <QLabel>
+
+#include "MyThread.h"
+#include "MyLabel.h"
+
+int main(int argc, char **argv){
+	QApplication app(argc, argv);
+	
+	MyLabel ml;
+	ml.show();
+	
+	MyThread mt;
+	
+	app.connect(&mt, SIGNAL(show(TSImage*)), &ml, SLOT(setValue(TSImage*)));
+	
+	mt.start();
+	
+	app.exec();
+}
+
+
+/*#include <TSCore/TSImage.h>
 #include <TSGui/TSImageDisplay.h>
+#include <TSCore/TouchSheep.h>
+#include <TSCore/TSListener.h>
 
 #include <QApplication>
 #include <QWidget>
 #include <QLabel>
 #include <QImage>
 #include <QPixmap>
+#include <QThread>
 
 #include <cv.h>
 #include <highgui.h>
 
 #include <stdio.h>
 
+class MyTSImageDisplay: public QLabel{
+public:
+	void setTSImage(TSImage *tsImg){
+		QImage qImage = QImage( (unsigned char *)tsImg->imageData, tsImg->width, tsImg->height, 
+								tsImg->widthStep, QImage::Format_RGB888);
+		QPixmap pm = QPixmap::fromImage(qImage,0);
+		
+		setPixmap(pm);
+	}
+public slots:
+     void setValue(TSImage *img){
+		setTSImage(img);
+	}
+};
+
+MyTSImageDisplay *tsid;
+
+class MyListener: public TSListener{
+	
+	void performed (TSEvent* e){
+		
+	}
+	
+};
+
+class MyThread : public QThread {
+private:
+	void show();
+
+public:
+	void run(){
+		
+		IplImage *img = 0;
+		img = cvLoadImage( "foto1.jpg", CV_LOAD_IMAGE_UNCHANGED );
+		cvConvertImage(img, img, CV_CVTIMG_SWAP_RB);
+		TSImage *tsImage;
+		tsImage = new TSImage();
+		tsImage->imageData = img->imageData;
+		tsImage->width = img->width;
+		tsImage->height = img->height;
+		tsImage->widthStep = img->widthStep;
+        
+		for( int count = 0; count < 20; count++ ) {
+			show();
+		}
+		
+	}
+};
+
 int main(int argc, char *argv[]){
 	QApplication *app = new QApplication(argc, argv);
 	
-	IplImage *img = 0;
-	img = cvLoadImage( "foto1.jpg", CV_LOAD_IMAGE_UNCHANGED );
-	cvConvertImage(img, img, CV_CVTIMG_SWAP_RB);
-	TSImage *tsImage;
-	tsImage = new TSImage();
-	tsImage->imageData = img->imageData;
-	tsImage->width = img->width;
-	tsImage->height = img->height;
-	tsImage->widthStep = img->widthStep;
+	//TouchSheep *ts = new TouchSheep("video5.mpg", 30, 10, 256, 30);
 	
-	TSImageDisplay *tsid = new TSImageDisplay();
-	tsid->setTSImage(tsImage);
+	//MyListener *listener = new MyListener();
+	//ts->addTSListener(listener);
+	
+	//QLabel *label = new QLabel("Label");
+	//label->show();
+	
+	tsid = new MyTSImageDisplay();
 	tsid->show();
+	
+	MyThread a;
+	
+	//app->connect(&a, SIGNAL(show(TSImage*)), &tsid, SLOT(setValue(TSImage*)));
+	
+	//a.start();
+	
+	//int ret = ts->start();
+	
+	//printf("%d\n", ret);
 	
 	app->exec();
 }
-
+*/
 //#include "TSCore/TSApplication.h"
 //#include "TSCore/TSListener.h"
 //#include "TSCore/TSTouchMarkerListener.h"

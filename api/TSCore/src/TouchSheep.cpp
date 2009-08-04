@@ -15,6 +15,7 @@
 
 #include "TouchSheep.h"
 #include "TSImage.h"
+#include "TSCaptureException.h"
 
 int TouchSheep::RightThumbFinger = 1;
 int TouchSheep::RightIndexFinger = 2;

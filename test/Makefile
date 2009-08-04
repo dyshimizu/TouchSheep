@@ -6,15 +6,17 @@ DEL           = rm -R -f
 MKDIR         = mkdir -p
 INCPATH       = `pkg-config --cflags opencv` -I/usr/local/include/TouchSheep -I/usr/include/qt4/QtCore \
  				-I/usr/include/qt4/QtGui -I/usr/include/qt4
-LIBS          = `pkg-config --libs opencv`
+LIBS          = `pkg-config --libs opencv` -lpthread
 DOC           = doc
 SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/main.cpp
+SOURCES       = $(SOURCE)/main.cpp \
+				$(SOURCE)/MyThread.cpp
 
-OBJECTS       = $(RELEASE)/main.o 
+OBJECTS       = $(RELEASE)/main.o \
+				$(RELEASE)/MyThread.o
                 
 TARGET        = $(RELEASE)/test
 
@@ -30,6 +32,10 @@ dirrelease:
 
 $(RELEASE)/main.o: $(SOURCE)/main.cpp
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.cpp
+
+$(RELEASE)/MyThread.o: $(SOURCE)/MyThread.cpp
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/MyThread.o $(SOURCE)/MyThread.cpp
+
 
 ####### Clean
 .PHONY : clean
