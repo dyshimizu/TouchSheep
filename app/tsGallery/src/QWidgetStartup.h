@@ -22,6 +22,8 @@ class TouchSheep;
 class TSListenerGallery;
 class TSVideoDisplay;
 
+class QPushButton;
+
 class QWidgetStartup: public QWidget{
 Q_OBJECT
 public:
@@ -33,6 +35,9 @@ private:
 	TouchSheep* touchSheep;
 	TSListenerGallery *tsListenerGallery;
 	TSVideoDisplay *tsVideoDisplay;
+	QPushButton *qPushButtonMark;
+public slots:
+	void qPushButtonMarkClick();
 };
 
 #endif

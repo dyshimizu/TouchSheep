@@ -16,11 +16,14 @@
 #ifndef TSVIDEODISPLAY_H
 #define TSVIDEODISPLAY_H
 
-#include <TSGui/TSImageDisplay.h>
+#include <QLabel>
 
-class TSVideoDisplay: public TSImageDisplay{
+#include <TSCore/TSImage.h>
+
+class TSVideoDisplay: public QLabel{
 Q_OBJECT
-	
+public:
+	void setTSImage(TSImage *tsImg);
 public slots:
 	void showFrame(TSImage *img);
 };
