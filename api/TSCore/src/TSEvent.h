@@ -23,15 +23,13 @@
 
 #include "TSMarker.h"
 
-class TSImage;
-
 class TSEvent
 {
 public:
 	TSEvent ();
 	virtual ~TSEvent ();
 	
-	TSImage *img;
+	IplImage *img;
 	std::list<TSMarker*> tsMarkerList;
 };
 

@@ -14,7 +14,6 @@
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "TouchSheep.h"
-#include "TSImage.h"
 #include "TSCaptureException.h"
 
 int TouchSheep::RightThumbFinger = 1;
@@ -142,23 +141,13 @@ void TouchSheep::handle (IplImage* img, MarkerList markerList){
 		m = m->next;
 	}
 	
-	// Conversão de IplImage para TSImage
-	cvConvertImage(img, img, CV_CVTIMG_SWAP_RB);
-	TSImage *tsImage;
-	tsImage = new TSImage();
-	tsImage->imageData = img->imageData;
-	tsImage->width = img->width;
-	tsImage->height = img->height;
-	tsImage->widthStep = img->widthStep;
-	
 	// Chama os listeners cadastrados
 	std::list<TSListener*>::iterator it;
 	for ( it=tsListenerList.begin() ; it != tsListenerList.end(); it++ ){
-		(*it)->listening(tsImage, tsMarkerList);
+		(*it)->listening(img, tsMarkerList);
 	}
 	
 	tsMarkerList.clear();
-	delete tsImage;
 }
 
 TouchSheep::~TouchSheep (){

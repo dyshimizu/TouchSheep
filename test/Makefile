@@ -12,11 +12,9 @@ SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/main.cpp \
-				$(SOURCE)/MyThread.cpp
+SOURCES       = $(SOURCE)/main.cpp
 
-OBJECTS       = $(RELEASE)/main.o \
-				$(RELEASE)/MyThread.o
+OBJECTS       = $(RELEASE)/main.o
                 
 TARGET        = $(RELEASE)/test
 
@@ -32,9 +30,6 @@ dirrelease:
 
 $(RELEASE)/main.o: $(SOURCE)/main.cpp
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/main.o $(SOURCE)/main.cpp
-
-$(RELEASE)/MyThread.o: $(SOURCE)/MyThread.cpp
-	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/MyThread.o $(SOURCE)/MyThread.cpp
 
 
 ####### Clean

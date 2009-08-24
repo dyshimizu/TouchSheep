@@ -29,7 +29,7 @@ void TSListener::performed (TSEvent* e){
 	
 }
 
-void TSListener::listening (TSImage* img, std::list<TSMarker*> tsMarkerList){
+void TSListener::listening (IplImage* img, std::list<TSMarker*> tsMarkerList){
 	TSEvent* e = new TSEvent();
 	e->img = img;
 	e->tsMarkerList = tsMarkerList;
