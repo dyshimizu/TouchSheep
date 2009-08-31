@@ -12,9 +12,11 @@ SOURCE        = src
 RELEASE       = release
 ####### Files
 
-SOURCES       = $(SOURCE)/TSImageDisplay.cpp
+SOURCES       = $(SOURCE)/TSDisplay.cpp \
+				$(SOURCE)/TSListenerDisplay.cpp
 
-OBJECTS       = $(RELEASE)/TSImageDisplay.o
+OBJECTS       = $(RELEASE)/TSDisplay.o \
+				$(RELEASE)/TSListenerDisplay.o
                 
 TARGET        = $(RELEASE)/libtsgui.so
 
@@ -31,8 +33,11 @@ $(TARGET): dirrelease $(OBJECTS)
 dirrelease: 
 	@$(MKDIR) $(RELEASE)
 
-$(RELEASE)/TSImageDisplay.o: $(SOURCE)/TSImageDisplay.cpp
-	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSImageDisplay.o $(SOURCE)/TSImageDisplay.cpp
+$(RELEASE)/TSDisplay.o: $(SOURCE)/TSDisplay.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSDisplay.o $(SOURCE)/TSDisplay.cpp
+
+$(RELEASE)/TSListenerDisplay.o: $(SOURCE)/TSListenerDisplay.cpp
+	$(CXX) -c -fPIC $(INCPATH) $(LIBS) -o $(RELEASE)/TSListenerDisplay.o $(SOURCE)/TSListenerDisplay.cpp
 
 
 ####### Install
@@ -41,7 +46,8 @@ $(RELEASE)/TSImageDisplay.o: $(SOURCE)/TSImageDisplay.cpp
 install:
 	cp $(TARGET) $(INSTALLDIR)/libtsgui.so
 	@$(MKDIR) $(INCLUDEDIR)
-	cp $(SOURCE)/TSImageDisplay.h $(INCLUDEDIR)/TSImageDisplay.h
+	cp $(SOURCE)/TSDisplay.h $(INCLUDEDIR)/TSDisplay.h
+	cp $(SOURCE)/TSListenerDisplay.h $(INCLUDEDIR)/TSListenerDisplay.h
 	ldconfig
 	@echo Instalado com sucesso!
 
@@ -50,7 +56,8 @@ install:
 
 uninstall:
 	rm $(INSTALLDIR)/libtsgui.so
-	rm $(INCLUDEDIR)/TSImageDisplay.h
+	rm $(INCLUDEDIR)/TSDisplay.h
+	rm $(INCLUDEDIR)/TSListenerDisplay.h
 	@echo Removido com sucesso!
 
 ####### Clean
