@@ -25,7 +25,7 @@ int main(){
 	TouchSheep* touchSheep = new TouchSheep("video5.mpg", 30, 10, 256, 30);
 	
 	// cria o display para visualizar o vídeo
-	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery");
+	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery", touchSheep);
 	touchSheep->addTSListener((TSListener*)(tsDisplayVideo->tsListenerDisplayVideo));
 	
 	// inicia a interface

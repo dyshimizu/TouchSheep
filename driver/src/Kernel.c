@@ -15,6 +15,7 @@
 
 #include "Kernel.h"
 #include <stdio.h>
+#include <unistd.h>
 #include <pthread.h>
 
 MarkerList markerList;
@@ -86,7 +87,8 @@ void kernelLoop(CvCapture* capture, void handle(IplImage*, MarkerList), int refr
 			count = refresh;
 		}
 		
-		cvWaitKey(10); // trocar por sleep
+		//cvWaitKey(10); // trocar por sleep
+		usleep(10000);
 		if(stop)
 			break;
 		

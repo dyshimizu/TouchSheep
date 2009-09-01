@@ -20,14 +20,19 @@
 
 #include "TSListenerDisplayVideo.h"
 
+class TouchSheep;
+
 class TSDisplayVideo: public TSDisplay
 {
 public:
-	TSDisplayVideo(char* name);
+	TSDisplayVideo(char* name, TouchSheep *ts);
 	virtual ~TSDisplayVideo();
 	virtual void on_mouse( int event, int x, int y, int flags, void* param );
 	
 	TSListenerDisplayVideo* tsListenerDisplayVideo;
+	
+private:
+	TouchSheep *touchSheep;
 };
 
 #endif

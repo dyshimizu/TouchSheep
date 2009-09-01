@@ -18,15 +18,18 @@
 
 #include <TSGui/TSListenerDisplay.h>
 
+class TouchSheep;
+
 class TSListenerDisplayVideo: public TSListenerDisplay
 {
 public:
-	TSListenerDisplayVideo (char* name);
+	TSListenerDisplayVideo (char* name, TouchSheep* ts);
 	virtual ~TSListenerDisplayVideo ();
 	
 	virtual void performed (TSEvent* e);
 private:
 	char* name;
+	TouchSheep* touchSheep;
 };
 
 #endif

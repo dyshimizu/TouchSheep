@@ -15,10 +15,13 @@
 
 #include "TSDisplayVideo.h"
 
+#include <TSCore/TouchSheep.h>
+
 #include <stdio.h>
 
-TSDisplayVideo::TSDisplayVideo(char* name): TSDisplay(name){
-	tsListenerDisplayVideo = new TSListenerDisplayVideo(name);
+TSDisplayVideo::TSDisplayVideo(char* name, TouchSheep* ts): TSDisplay(name){
+	tsListenerDisplayVideo = new TSListenerDisplayVideo(name, ts);
+	touchSheep = ts;
 }
 
 TSDisplayVideo::~TSDisplayVideo(){
@@ -26,5 +29,5 @@ TSDisplayVideo::~TSDisplayVideo(){
 }
 
 void TSDisplayVideo::on_mouse( int event, int x, int y, int flags, void* param ){
-	printf ("oi");
+	
 }
