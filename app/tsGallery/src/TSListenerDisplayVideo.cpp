@@ -5,6 +5,7 @@
 TSListenerDisplayVideo::TSListenerDisplayVideo (char* name, TouchSheep* ts): TSListenerDisplay(name){
 	this->name = name;
 	touchSheep = ts;
+	indexId = -1;
 }
 
 TSListenerDisplayVideo::~TSListenerDisplayVideo (){
@@ -29,10 +30,17 @@ void TSListenerDisplayVideo::performed (TSEvent* e){
 			break;
 		case 32:
 			// adicionar marcador
-			touchSheep->addTSMarker(300, 220, 340, 260, 0);
+			if(indexId < 3){
+				indexId++;
+				markerId[indexId] = touchSheep->addTSMarker(300, 220, 340, 260, 0);
+			}
 			break;
 		case 65288:
 			// remover marcador
+			if(indexId > -1){
+				touchSheep->removeTSMarker(markerId[indexId]);
+				indexId--;
+			}
 			break;
 		case 10:
 			// inicar a aplicação

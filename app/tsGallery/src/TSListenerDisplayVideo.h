@@ -30,6 +30,8 @@ public:
 private:
 	char* name;
 	TouchSheep* touchSheep;
+	int markerId[4];
+	int indexId;
 };
 
 #endif
