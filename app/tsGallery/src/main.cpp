@@ -16,9 +16,12 @@
 #include <TSCore/TouchSheep.h>
 
 #include "TSDisplayVideo.h"
+#include "TSDisplayPhoto.h"
 
 #include <stdio.h>
 #include <unistd.h>
+
+#include <highgui.h>
 
 int main(){
 	
@@ -26,7 +29,7 @@ int main(){
 	TouchSheep* touchSheep = new TouchSheep("video5.mpg", 30, 10, 256, 30);
 	
 	// cria o display para visualizar o vídeo
-	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery", touchSheep);
+	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery - Calibrando..", touchSheep);
 	touchSheep->addTSListener((TSListener*)(tsDisplayVideo->tsListenerDisplayVideo));
 	
 	// inicia a interface
@@ -37,6 +40,13 @@ int main(){
 	}
 	
 	touchSheep->removeAllTSListeners();
+	
+	TSDisplayPhoto* tsDisplayPhoto = new TSDisplayPhoto("TSGallery", "foto.jpg", touchSheep);
+	while(tsDisplayPhoto->isRun()){
+		tsDisplayPhoto->show(45, 1.7);
+		if( cvWaitKey(30) == 27 )
+			break;
+	}
 	
 	return 0;
 }

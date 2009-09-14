@@ -13,32 +13,29 @@
 //     You should have received a copy of the GNU General Public License
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "TSDisplayVideo.h"
+#ifndef TSDISPLAYPHOTO_H
+#define TSDISPLAYPHOTO_H
 
-#include <TSCore/TouchSheep.h>
+#include <TSGui/TSDisplay.h>
 
-#include <stdio.h>
+#include <cxcore.h>
 
-TSDisplayVideo::TSDisplayVideo(char* name, TouchSheep* ts): TSDisplay(name){
-	run = true;
-	tsListenerDisplayVideo = new TSListenerDisplayVideo(name, ts, this);
-	touchSheep = ts;
-	this->name = name;
-}
+class TouchSheep;
 
-TSDisplayVideo::~TSDisplayVideo(){
-	
-}
+class TSDisplayPhoto: public TSDisplay
+{
+public:
+	TSDisplayPhoto(char* name, char* photo, TouchSheep *ts);
+	virtual ~TSDisplayPhoto();
+	bool isRun();
+	void stop();
+	void show(int angle, float factor);
+private:
+	TouchSheep *touchSheep;
+	char* name;
+	bool run;
+	IplImage* img;
+	IplImage* dst;
+};
 
-void TSDisplayVideo::on_mouse( int event, int x, int y, int flags, void* param ){
-	
-}
-
-void TSDisplayVideo::stop(){
-	cvDestroyWindow(name);
-	run = false;
-}
-
-bool TSDisplayVideo::isRun(){
-	return run;
-}
+#endif

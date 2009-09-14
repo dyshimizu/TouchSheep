@@ -14,11 +14,13 @@ RELEASE       = release
 
 SOURCES       = $(SOURCE)/main.cpp \
 				$(SOURCE)/TSDisplayVideo.cpp \
-				$(SOURCE)/TSListenerDisplayVideo.cpp
+				$(SOURCE)/TSListenerDisplayVideo.cpp \
+				$(SOURCE)/TSDisplayPhoto.cpp
 
 OBJECTS       = $(RELEASE)/main.o \
 				$(RELEASE)/TSDisplayVideo.o \
-				$(RELEASE)/TSListenerDisplayVideo.o
+				$(RELEASE)/TSListenerDisplayVideo.o \
+				$(RELEASE)/TSDisplayPhoto.o
                 
 TARGET        = $(RELEASE)/test
 
@@ -40,6 +42,10 @@ $(RELEASE)/TSDisplayVideo.o: $(SOURCE)/TSDisplayVideo.cpp
 
 $(RELEASE)/TSListenerDisplayVideo.o: $(SOURCE)/TSListenerDisplayVideo.cpp
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSListenerDisplayVideo.o $(SOURCE)/TSListenerDisplayVideo.cpp
+	
+$(RELEASE)/TSDisplayPhoto.o: $(SOURCE)/TSDisplayPhoto.cpp
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSDisplayPhoto.o $(SOURCE)/TSDisplayPhoto.cpp
+
 
 ####### Clean
 .PHONY : clean
