@@ -18,6 +18,7 @@
 #include "TSDisplayVideo.h"
 
 #include <stdio.h>
+#include <unistd.h>
 
 int main(){
 	
@@ -31,8 +32,11 @@ int main(){
 	// inicia a interface
 	touchSheep->start();
 	
-	int i;
-	scanf("%d", &i);
+	while(tsDisplayVideo->isRun()){
+		sleep(1);
+	}
+	
+	touchSheep->removeAllTSListeners();
 	
 	return 0;
 }

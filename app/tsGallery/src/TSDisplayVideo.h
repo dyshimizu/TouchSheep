@@ -28,11 +28,15 @@ public:
 	TSDisplayVideo(char* name, TouchSheep *ts);
 	virtual ~TSDisplayVideo();
 	virtual void on_mouse( int event, int x, int y, int flags, void* param );
+	void stop();
+	bool isRun();
 	
 	TSListenerDisplayVideo* tsListenerDisplayVideo;
 	
 private:
 	TouchSheep *touchSheep;
+	char* name;
+	bool run;
 };
 
 #endif

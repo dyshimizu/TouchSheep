@@ -1,9 +1,11 @@
 #include "TSListenerDisplayVideo.h"
+#include "TSDisplayVideo.h"
 
 #include <TSCore/TouchSheep.h>
 
-TSListenerDisplayVideo::TSListenerDisplayVideo (char* name, TouchSheep* ts): TSListenerDisplay(name){
+TSListenerDisplayVideo::TSListenerDisplayVideo (char* name, TouchSheep* ts, TSDisplayVideo* tsdv): TSListenerDisplay(name){
 	this->name = name;
+	tsDisplayVideo = tsdv;
 	touchSheep = ts;
 	indexId = -1;
 }
@@ -44,6 +46,7 @@ void TSListenerDisplayVideo::performed (TSEvent* e){
 			break;
 		case 10:
 			// inicar a aplicação
+			tsDisplayVideo->stop();
 			break;
 	}
 	//if(key!=-1){

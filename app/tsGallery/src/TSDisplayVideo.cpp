@@ -20,8 +20,10 @@
 #include <stdio.h>
 
 TSDisplayVideo::TSDisplayVideo(char* name, TouchSheep* ts): TSDisplay(name){
-	tsListenerDisplayVideo = new TSListenerDisplayVideo(name, ts);
+	run = true;
+	tsListenerDisplayVideo = new TSListenerDisplayVideo(name, ts, this);
 	touchSheep = ts;
+	this->name = name;
 }
 
 TSDisplayVideo::~TSDisplayVideo(){
@@ -30,4 +32,13 @@ TSDisplayVideo::~TSDisplayVideo(){
 
 void TSDisplayVideo::on_mouse( int event, int x, int y, int flags, void* param ){
 	
+}
+
+void TSDisplayVideo::stop(){
+	cvDestroyWindow(name);
+	run = false;
+}
+
+bool TSDisplayVideo::isRun(){
+	return run;
 }

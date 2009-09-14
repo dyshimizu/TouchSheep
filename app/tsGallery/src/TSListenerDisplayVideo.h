@@ -19,17 +19,19 @@
 #include <TSGui/TSListenerDisplay.h>
 
 class TouchSheep;
+class TSDisplayVideo;
 
 class TSListenerDisplayVideo: public TSListenerDisplay
 {
 public:
-	TSListenerDisplayVideo (char* name, TouchSheep* ts);
+	TSListenerDisplayVideo (char* name, TouchSheep* ts, TSDisplayVideo* tsdv);
 	virtual ~TSListenerDisplayVideo ();
 	
 	virtual void performed (TSEvent* e);
 private:
 	char* name;
 	TouchSheep* touchSheep;
+	TSDisplayVideo* tsDisplayVideo;
 	int markerId[4];
 	int indexId;
 };
