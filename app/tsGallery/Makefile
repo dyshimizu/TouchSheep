@@ -15,12 +15,14 @@ RELEASE       = release
 SOURCES       = $(SOURCE)/main.cpp \
 				$(SOURCE)/TSDisplayVideo.cpp \
 				$(SOURCE)/TSListenerDisplayVideo.cpp \
-				$(SOURCE)/TSDisplayPhoto.cpp
+				$(SOURCE)/TSDisplayPhoto.cpp \
+				$(SOURCE)/TSListenerPhoto.cpp
 
 OBJECTS       = $(RELEASE)/main.o \
 				$(RELEASE)/TSDisplayVideo.o \
 				$(RELEASE)/TSListenerDisplayVideo.o \
-				$(RELEASE)/TSDisplayPhoto.o
+				$(RELEASE)/TSDisplayPhoto.o \
+				$(RELEASE)/TSListenerPhoto.o
                 
 TARGET        = $(RELEASE)/test
 
@@ -45,6 +47,9 @@ $(RELEASE)/TSListenerDisplayVideo.o: $(SOURCE)/TSListenerDisplayVideo.cpp
 	
 $(RELEASE)/TSDisplayPhoto.o: $(SOURCE)/TSDisplayPhoto.cpp
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSDisplayPhoto.o $(SOURCE)/TSDisplayPhoto.cpp
+
+$(RELEASE)/TSListenerPhoto.o: $(SOURCE)/TSListenerPhoto.cpp
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSListenerPhoto.o $(SOURCE)/TSListenerPhoto.cpp
 
 
 ####### Clean

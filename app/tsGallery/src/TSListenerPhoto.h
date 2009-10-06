@@ -16,10 +16,18 @@
 #ifndef TSLISTENERPHOTO_H
 #define TSLISTENERPHOTO_H
 
-class TSListenerPhoto
+#include <TSCore/TSTouchMarkerListener.h>
+
+class TSListenerPhoto: public TSTouchMarkerListener
 {
 public:
-	
+	TSListenerPhoto(int marker1, int marker2, int i);
+	void touchPerformed(TSTouchMarkerEvent* e);
+	void releasePerformed(TSTouchMarkerEvent* e);
+	int zoom;
+	int angle;
+	bool touch;
+	int x;
 };
 
 #endif

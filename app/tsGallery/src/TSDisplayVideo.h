@@ -29,7 +29,10 @@ public:
 	virtual ~TSDisplayVideo();
 	virtual void on_mouse( int event, int x, int y, int flags, void* param );
 	void stop();
+	void start();
 	bool isRun();
+	
+	void showImage(char* filename, int zoom, int angle);
 	
 	TSListenerDisplayVideo* tsListenerDisplayVideo;
 	

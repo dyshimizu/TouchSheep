@@ -16,7 +16,7 @@
 #include <TSCore/TouchSheep.h>
 
 #include "TSDisplayVideo.h"
-#include "TSDisplayPhoto.h"
+#include "TSListenerPhoto.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -26,10 +26,10 @@
 int main(){
 	
 	// instancia a interface
-	TouchSheep* touchSheep = new TouchSheep("video5.mpg", 30, 10, 256, 30);
+	TouchSheep* touchSheep = new TouchSheep(0, 30, 10, 256, 30);
 	
 	// cria o display para visualizar o vídeo
-	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery - Calibrando..", touchSheep);
+	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery", touchSheep);
 	touchSheep->addTSListener((TSListener*)(tsDisplayVideo->tsListenerDisplayVideo));
 	
 	// inicia a interface
@@ -41,12 +41,28 @@ int main(){
 	
 	touchSheep->removeAllTSListeners();
 	
-	TSDisplayPhoto* tsDisplayPhoto = new TSDisplayPhoto("TSGallery", "foto.jpg", touchSheep);
+	tsDisplayVideo->start();
+	
+	TSListenerPhoto* tsListenerPhoto = new TSListenerPhoto(0,1,1);
+	TSListenerPhoto* tsListenerPhoto2 = new TSListenerPhoto(2,3,2);
+	touchSheep->addTSListener((TSListener*)(tsListenerPhoto));
+	touchSheep->addTSListener((TSListener*)(tsListenerPhoto2));
+	
+	while(tsDisplayVideo->isRun()){
+		if(tsListenerPhoto->touch)
+			tsDisplayVideo->showImage("img1.jpg", tsListenerPhoto->zoom, tsListenerPhoto->angle);
+		if(tsListenerPhoto2->touch)
+			tsDisplayVideo->showImage("img1.jpg", tsListenerPhoto2->zoom, tsListenerPhoto2->angle);
+		if(cvWaitKey(20) == 27)
+			break;
+	}
+		
+	/*TSDisplayPhoto* tsDisplayPhoto = new TSDisplayPhoto("TSGallery", "foto.jpg", touchSheep);
 	while(tsDisplayPhoto->isRun()){
 		tsDisplayPhoto->show(45, 1.7);
 		if( cvWaitKey(30) == 27 )
 			break;
-	}
+	}*/
 	
 	return 0;
 }

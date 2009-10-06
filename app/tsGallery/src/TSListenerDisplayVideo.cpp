@@ -46,7 +46,9 @@ void TSListenerDisplayVideo::performed (TSEvent* e){
 			break;
 		case 10:
 			// inicar a aplicação
-			tsDisplayVideo->stop();
+			//if (indexId == 3){
+				tsDisplayVideo->stop();
+			//}
 			break;
 	}
 	//if(key!=-1){

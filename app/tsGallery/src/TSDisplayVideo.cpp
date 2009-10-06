@@ -35,10 +35,53 @@ void TSDisplayVideo::on_mouse( int event, int x, int y, int flags, void* param )
 }
 
 void TSDisplayVideo::stop(){
-	cvDestroyWindow(name);
 	run = false;
+}
+
+void TSDisplayVideo::start(){
+	run = true;
 }
 
 bool TSDisplayVideo::isRun(){
 	return run;
 }
+
+void TSDisplayVideo::showImage(char* filename, int zoom, int angle){
+	IplImage* img = cvLoadImage(filename, 1);
+	uchar* data = (uchar *)img->imageData;
+	int step = img->widthStep/sizeof(uchar);
+	int channel = img->nChannels;
+	int i;
+	int w = img->width;
+	int h = img->height;
+	for (i = 0; i < h; i++){
+		data[(i)*step+(0)*channel] = 0;
+		data[(i)*step+(0)*channel+1] = 0;
+		data[(i)*step+(0)*channel+2] = 0;
+    
+		data[(i)*step+(w-1)*channel] = 0;
+		data[(i)*step+(w-1)*channel+1] = 0;
+		data[(i)*step+(w-1)*channel+2] = 0;
+	}
+	for (i = 0; i < w; i++){
+		data[(0)*step+(i)*channel] = 0;
+		data[(0)*step+(i)*channel+1] = 0;
+		data[(0)*step+(i)*channel+2] = 0;
+    
+		data[(h-1)*step+(i)*channel] = 0;
+		data[(h-1)*step+(i)*channel+1] = 0;
+		data[(h-1)*step+(i)*channel+2] = 0;
+	}
+	
+	float m[6];
+	CvMat M = cvMat(2, 3, CV_32F, m);
+	m[0] = (float)(zoom*cos(-angle*CV_PI/180.));
+	m[1] = (float)(zoom*sin(-angle*CV_PI/180.));
+	m[3] = -m[1];
+	m[4] = m[0];
+	m[2] = w*0.5f;  
+	m[5] = h*0.5f;
+	cvGetQuadrangleSubPix( img, img, &M);
+	cvShowImage(name, img);
+}
+

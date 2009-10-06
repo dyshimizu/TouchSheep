@@ -14,3 +14,27 @@
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "TSListenerPhoto.h"
+
+TSListenerPhoto::TSListenerPhoto(int marker1, int marker2, int i):TSTouchMarkerListener (marker1, marker2){
+	zoom = 1;
+	angle = 0;
+	touch = false;
+	x = i;
+}
+
+void TSListenerPhoto::touchPerformed(TSTouchMarkerEvent* e){
+	touch = true;
+	if(x==1){
+		zoom = 1;
+		angle = 10;
+	}
+	else{
+		zoom = 1.7;
+		angle = 45;
+	}
+	printf("%d",x);
+}
+
+void TSListenerPhoto::releasePerformed(TSTouchMarkerEvent* e){
+	touch = false;
+}
