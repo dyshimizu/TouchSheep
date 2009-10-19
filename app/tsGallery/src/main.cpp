@@ -26,7 +26,7 @@
 int main(){
 	
 	// instancia a interface
-	TouchSheep* touchSheep = new TouchSheep(0, 30, 10, 256, 30);
+	TouchSheep* touchSheep = new TouchSheep(1, 30, 10, 256, 30);
 	
 	// cria o display para visualizar o vídeo
 	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery", touchSheep);

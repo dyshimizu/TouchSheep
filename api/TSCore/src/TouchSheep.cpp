@@ -34,7 +34,7 @@ TouchSheep::TouchSheep (int cam, int refresh, int vmin, int vmax, int smin){
 	mask = NULL;
 	hist = NULL;
 	
-	CvCapture *cvCapture = cvCaptureFromCAM(0);
+	CvCapture *cvCapture = cvCaptureFromCAM(cam);
 	if(!cvCapture)
 		throw tsCaptureException;
 	
