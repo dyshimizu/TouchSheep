@@ -32,6 +32,8 @@ public:
 	void start();
 	bool isRun();
 	
+	void putPixel(int x, int y);
+	
 	TSListenerDisplayVideo* tsListenerDisplayVideo;
 	
 private:

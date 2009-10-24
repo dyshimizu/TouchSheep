@@ -14,11 +14,13 @@ RELEASE       = release
 
 SOURCES       = $(SOURCE)/main.cpp \
 				$(SOURCE)/TSDisplayVideo.cpp \
-				$(SOURCE)/TSListenerDisplayVideo.cpp
+				$(SOURCE)/TSListenerDisplayVideo.cpp \
+				$(SOURCE)/TSTouchMarkerListenerPaint.cpp
 
 OBJECTS       = $(RELEASE)/main.o \
 				$(RELEASE)/TSDisplayVideo.o \
-				$(RELEASE)/TSListenerDisplayVideo.o
+				$(RELEASE)/TSListenerDisplayVideo.o \
+				$(RELEASE)/TSTouchMarkerListenerPaint.o
                 
 TARGET        = $(RELEASE)/tsPaint
 
@@ -43,6 +45,10 @@ $(RELEASE)/TSDisplayVideo.o: $(SOURCE)/TSDisplayVideo.cpp
 
 $(RELEASE)/TSListenerDisplayVideo.o: $(SOURCE)/TSListenerDisplayVideo.cpp
 	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSListenerDisplayVideo.o $(SOURCE)/TSListenerDisplayVideo.cpp
+
+$(RELEASE)/TSTouchMarkerListenerPaint.o: $(SOURCE)/TSTouchMarkerListenerPaint.cpp
+	$(CXX) -c $(INCPATH) $(LIBS) -o $(RELEASE)/TSTouchMarkerListenerPaint.o $(SOURCE)/TSTouchMarkerListenerPaint.cpp
+
 
 ####### Clean
 .PHONY : clean
