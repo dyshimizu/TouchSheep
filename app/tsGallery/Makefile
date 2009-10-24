@@ -24,7 +24,7 @@ OBJECTS       = $(RELEASE)/main.o \
 				$(RELEASE)/TSDisplayPhoto.o \
 				$(RELEASE)/TSListenerPhoto.o
                 
-TARGET        = $(RELEASE)/test
+TARGET        = $(RELEASE)/tsGallery
 
 ####### Compile
 all: $(TARGET)
