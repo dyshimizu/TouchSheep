@@ -29,10 +29,10 @@ public:
 	virtual ~TSDisplayVideo();
 	virtual void on_mouse( int event, int x, int y, int flags, void* param );
 	void stop();
-	void start();
+	void start(char* filename);
 	bool isRun();
 	
-	void showImage(char* filename, int zoom, int angle);
+	void showImage(double zoom, int angle);
 	
 	TSListenerDisplayVideo* tsListenerDisplayVideo;
 	
@@ -40,6 +40,8 @@ private:
 	TouchSheep *touchSheep;
 	char* name;
 	bool run;
+	IplImage* img;
+	IplImage* dst;
 };
 
 #endif

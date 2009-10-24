@@ -26,7 +26,7 @@
 int main(){
 	
 	// instancia a interface
-	TouchSheep* touchSheep = new TouchSheep(1, 30, 10, 256, 30);
+	TouchSheep* touchSheep = new TouchSheep("video.mpg", 30, 10, 256, 30);
 	
 	// cria o display para visualizar o vídeo
 	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery", touchSheep);
@@ -39,30 +39,49 @@ int main(){
 		sleep(1);
 	}
 	
+	//touchSheep->removeAllTSListeners();
+	//
+	//tsDisplayVideo->start();
+	//
+	//TSListenerPhoto* tsListenerPhoto = new TSListenerPhoto(0,1,1);
+	//TSListenerPhoto* tsListenerPhoto2 = new TSListenerPhoto(2,3,2);
+	//touchSheep->addTSListener((TSListener*)(tsListenerPhoto));
+	//touchSheep->addTSListener((TSListener*)(tsListenerPhoto2));
+	//
+	//while(tsDisplayVideo->isRun()){
+	//	if(tsListenerPhoto->touch)
+	//		tsDisplayVideo->showImage("img1.jpg", tsListenerPhoto->zoom, tsListenerPhoto->angle);
+	//	if(tsListenerPhoto2->touch)
+	//		tsDisplayVideo->showImage("img1.jpg", tsListenerPhoto2->zoom, tsListenerPhoto2->angle);
+	//	if(cvWaitKey(20) == 27)
+	//		break;
+	//}
+	
 	touchSheep->removeAllTSListeners();
+	tsDisplayVideo->start("img.bmp");
 	
-	tsDisplayVideo->start();
-	
-	TSListenerPhoto* tsListenerPhoto = new TSListenerPhoto(0,1,1);
-	TSListenerPhoto* tsListenerPhoto2 = new TSListenerPhoto(2,3,2);
-	touchSheep->addTSListener((TSListener*)(tsListenerPhoto));
-	touchSheep->addTSListener((TSListener*)(tsListenerPhoto2));
-	
+	char c;
+	double zoom = 1;
+	int angle = 0;
 	while(tsDisplayVideo->isRun()){
-		if(tsListenerPhoto->touch)
-			tsDisplayVideo->showImage("img1.jpg", tsListenerPhoto->zoom, tsListenerPhoto->angle);
-		if(tsListenerPhoto2->touch)
-			tsDisplayVideo->showImage("img1.jpg", tsListenerPhoto2->zoom, tsListenerPhoto2->angle);
-		if(cvWaitKey(20) == 27)
+		c = cvWaitKey(20);
+		if(c == 'w'){
+			zoom += 0.1;
+			tsDisplayVideo->showImage(zoom, angle);
+		}else if(c == 's'){
+			zoom -= 0.1;
+			tsDisplayVideo->showImage(zoom, angle);
+		}else if(c == 'a'){
+			angle += 5;
+			tsDisplayVideo->showImage(zoom, angle);
+		}else if(c == 'd'){
+			angle -= 5;
+			tsDisplayVideo->showImage(zoom, angle);
+		}
+		if(c == 27){
 			break;
+		}
 	}
-		
-	/*TSDisplayPhoto* tsDisplayPhoto = new TSDisplayPhoto("TSGallery", "foto.jpg", touchSheep);
-	while(tsDisplayPhoto->isRun()){
-		tsDisplayPhoto->show(45, 1.7);
-		if( cvWaitKey(30) == 27 )
-			break;
-	}*/
 	
 	return 0;
 }
