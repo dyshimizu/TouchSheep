@@ -26,7 +26,7 @@
 int main(){
 	
 	// instancia a interface
-	TouchSheep* touchSheep = new TouchSheep("video.mpg", 30, 10, 256, 30);
+	TouchSheep* touchSheep = new TouchSheep(1, 30, 10, 256, 30);
 	
 	// cria o display para visualizar o vídeo
 	TSDisplayVideo *tsDisplayVideo = new TSDisplayVideo("tsGallery", touchSheep);
@@ -61,7 +61,7 @@ int main(){
 	tsDisplayVideo->start("img.bmp");
 	
 	char c;
-	double zoom = 1;
+	double zoom = 1.1;
 	int angle = 0;
 	while(tsDisplayVideo->isRun()){
 		c = cvWaitKey(20);

@@ -56,21 +56,23 @@ void TSDisplayVideo::putPixel(int x, int y){
 	int step = img->widthStep/sizeof(uchar);
 	int channel = img->nChannels;
 	
-	data[(x)*step+(y)*channel] = 255;
-	data[(x)*step+(y)*channel+1] = 255;
-	data[(x)*step+(y)*channel+2] = 255;
+	data[(y)*step+(x)*channel] = 255;
+	data[(y)*step+(x)*channel+1] = 255;
+	data[(y)*step+(x)*channel+2] = 255;
 	
-	data[(x+1)*step+(y)*channel] = 255;
-	data[(x+1)*step+(y)*channel+1] = 255;
-	data[(x+1)*step+(y)*channel+2] = 255;
+	data[(y+1)*step+(x)*channel] = 255;
+	data[(y+1)*step+(x)*channel+1] = 255;
+	data[(y+1)*step+(x)*channel+2] = 255;
 	
-	data[(x+1)*step+(y+1)*channel] = 255;
-	data[(x+1)*step+(y+1)*channel+1] = 255;
-	data[(x+1)*step+(y+1)*channel+2] = 255;
+	data[(y+1)*step+(x+1)*channel] = 255;
+	data[(y+1)*step+(x+1)*channel+1] = 255;
+	data[(y+1)*step+(x+1)*channel+2] = 255;
 	
-	data[(x)*step+(y+1)*channel] = 255;
-	data[(x)*step+(y+1)*channel+1] = 255;
-	data[(x)*step+(y+1)*channel+2] = 255;
+	data[(y)*step+(x+1)*channel] = 255;
+	data[(y)*step+(x+1)*channel+1] = 255;
+	data[(y)*step+(x+1)*channel+2] = 255;
 	
 	cvShowImage(name, img);
 }
+
+
