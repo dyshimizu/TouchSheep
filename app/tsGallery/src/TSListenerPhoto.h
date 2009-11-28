@@ -18,16 +18,19 @@
 
 #include <TSCore/TSTouchMarkerListener.h>
 
+class TSDisplayVideo;
+
 class TSListenerPhoto: public TSTouchMarkerListener
 {
 public:
-	TSListenerPhoto(int marker1, int marker2, int i);
+	TSListenerPhoto(int marker1, int marker2, TSDisplayVideo* tsdv);
 	void touchPerformed(TSTouchMarkerEvent* e);
 	void releasePerformed(TSTouchMarkerEvent* e);
-	int zoom;
-	int angle;
-	bool touch;
+	TSDisplayVideo* tsDisplayVideo;
 	int x;
+	int w;
+	int angle;
+	float zoom;
 };
 
 #endif

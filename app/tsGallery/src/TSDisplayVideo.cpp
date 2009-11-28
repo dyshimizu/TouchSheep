@@ -14,6 +14,7 @@
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "TSDisplayVideo.h"
+#include "TSListenerPhoto.h"
 
 #include <TSCore/TouchSheep.h>
 
@@ -66,6 +67,8 @@ void TSDisplayVideo::start(char* filename){
 		data[(h-1)*step+(i)*channel+2] = 0;
 	}
 	showImage(1.1, 0);
+	TSListenerPhoto* tsListenerPhoto = new TSListenerPhoto(0, 1, this);
+	touchSheep->addTSListener((TSListener*)(tsListenerPhoto));
 	run = true;
 }
 

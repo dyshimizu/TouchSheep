@@ -14,27 +14,37 @@
 //     along with TouchSheep.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "TSListenerPhoto.h"
+#include "TSDisplayVideo.h"
 
-TSListenerPhoto::TSListenerPhoto(int marker1, int marker2, int i):TSTouchMarkerListener (marker1, marker2){
-	zoom = 1;
+TSListenerPhoto::TSListenerPhoto(int marker1, int marker2, TSDisplayVideo* tsdv):TSTouchMarkerListener (marker1, marker2){
+	tsDisplayVideo = tsdv;
+	x = -1;
+	w = -1;
 	angle = 0;
-	touch = false;
-	x = i;
+	zoom = 1.1;
 }
 
 void TSListenerPhoto::touchPerformed(TSTouchMarkerEvent* e){
-	touch = true;
-	if(x==1){
-		zoom = 1;
-		angle = 10;
+	//printf("touch\n");
+	if(x < 0 || w < 0){
+		x = e->marker1->position.x;
+		w = e->marker1->position.width;
 	}
-	else{
-		zoom = 1.7;
-		angle = 45;
-	}
-	printf("%d",x);
+	//float z = zoom + ((float)w-(float)e->marker1->position.width)/10;
+	//if(z < 0)
+	//	z = 0.1;
+	//if(z > 2)
+	//	z = 1.9;
+	printf("%d\n", (w-e->marker1->position.width));
+	tsDisplayVideo->showImage(zoom, angle + (e->marker1->position.x - x));
 }
 
 void TSListenerPhoto::releasePerformed(TSTouchMarkerEvent* e){
-	touch = false;
+	angle += (e->marker1->position.x - x);
+	//zoom += ((float)w-(float)e->marker1->position.width)/10;
+	x = -1;
+	w = -1;
+	//printf("relese\n");
+	//tsDisplayVideo->showImage(0.9, 80);
 }
+
